@@ -82,7 +82,7 @@
                             <li @click="menu=36" >
                                 <a  href="#"><i class="icon-bag"></i>Proveedores</a>
                             </li>
-                            <li @click="menu=36" >
+                            <li @click="menu=64" >
                                 <a  href="#"><i class="icon-bag"></i>Rol Usuarios</a>
                             </li>
                         </ul>                            

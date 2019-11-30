@@ -54,7 +54,7 @@ class UserController extends Controller
 
             $persona = new Persona();
             $persona->id = $request->id;
-            $persona->nombre = $request->nombre;
+            $persona->nombres = $request->nombre;
             $persona->tp_doc = $request->tp_doc;
             $persona->num_doc = $request->num_doc;
             $persona->direccion = $request->direccion;

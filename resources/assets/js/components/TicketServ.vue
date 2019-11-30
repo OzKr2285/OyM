@@ -40,9 +40,34 @@
                   <md-icon>search</md-icon>
                 </md-button>
               </div>&nbsp;&nbsp;&nbsp;
-                <div class="md-layout-item">                                        
-                    <md-checkbox v-model="demo">Finalizados</md-checkbox>
+    
+                  <div class="md-layout-item">
+                    <md-datepicker
+                      v-model="fecR"
+                      value="fecI"
+                      @input="toString"
+                      md-immediately
+                      :md-model-type="String"
+                    >
+                      <label>Fecha de Inicio</label>
+                    </md-datepicker>
+
+                  </div>&nbsp;&nbsp;&nbsp;
+                  <div class="md-layout-item">
+                    <md-datepicker
+                      v-model="fecF"
+                      value="fecF"
+                      @input="toString"
+                      md-immediately
+                      :md-model-type="String"
+                    >
+                      <label>Fecha de Final</label>
+                    </md-datepicker>
                   </div>
+                  &nbsp;&nbsp;&nbsp;
+                <!-- <div class="md-layout-item">                                         -->
+                    <md-checkbox v-model="demo">Finalizados</md-checkbox>
+                  <!-- </div> -->
             </div>
             <div class="table-responsive">
               <table class="table table-bordered table-striped table-sm">
@@ -889,8 +914,8 @@ export default {
       modal3: 0,
       mostrarDisp:0,     
       idArea:0,     
-
-      fecNac: "",
+      fecR: format(now, dateFormat),
+      fecF: format(now, dateFormat),
       // Genero M-F
       arrayPrioridad: [
         { id: "N", name: "Normal" },

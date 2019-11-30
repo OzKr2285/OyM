@@ -106689,6 +106689,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -106744,8 +106769,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_material_dist_components__["MdList"]);
       modal3: 0,
       mostrarDisp: 0,
       idArea: 0,
-
-      fecNac: "",
+      fecR: format(now, dateFormat),
+      fecF: format(now, dateFormat),
       // Genero M-F
       arrayPrioridad: [{ id: "N", name: "Normal" }, { id: "A", name: "Alta" }, { id: "MA", name: "Muy Alta" }],
       // Tipo Documento
@@ -107342,91 +107367,144 @@ var render = function() {
           _vm.listado == 1
             ? [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "md-layout" }, [
-                    _c(
-                      "div",
-                      { staticClass: "md-layout-item" },
-                      [
-                        _c(
-                          "md-field",
-                          { attrs: { "md-clearable": "" } },
-                          [
-                            _c("label", [_vm._v("Qué desea Buscar")]),
-                            _vm._v(" "),
-                            _c("md-input", {
+                  _c(
+                    "div",
+                    { staticClass: "md-layout" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "md-layout-item" },
+                        [
+                          _c(
+                            "md-field",
+                            { attrs: { "md-clearable": "" } },
+                            [
+                              _c("label", [_vm._v("Qué desea Buscar")]),
+                              _vm._v(" "),
+                              _c("md-input", {
+                                on: {
+                                  keypress: function($event) {
+                                    _vm.listarDatos(
+                                      _vm.page,
+                                      _vm.buscar,
+                                      _vm.criterio
+                                    )
+                                  }
+                                },
+                                model: {
+                                  value: _vm.buscar,
+                                  callback: function($$v) {
+                                    _vm.buscar = $$v
+                                  },
+                                  expression: "buscar"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v("   \n            "),
+                      _c(
+                        "div",
+                        { staticClass: "md-layout-item" },
+                        [
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "md-button",
+                            {
+                              staticClass:
+                                "md-icon-button md-dense md-raised md-primary",
                               on: {
-                                keypress: function($event) {
+                                click: function($event) {
                                   _vm.listarDatos(
                                     _vm.page,
                                     _vm.buscar,
                                     _vm.criterio
                                   )
                                 }
+                              }
+                            },
+                            [_c("md-icon", [_vm._v("search")])],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v("   \n  \n                "),
+                      _c(
+                        "div",
+                        { staticClass: "md-layout-item" },
+                        [
+                          _c(
+                            "md-datepicker",
+                            {
+                              attrs: {
+                                value: "fecI",
+                                "md-immediately": "",
+                                "md-model-type": String
                               },
+                              on: { input: _vm.toString },
                               model: {
-                                value: _vm.buscar,
+                                value: _vm.fecR,
                                 callback: function($$v) {
-                                  _vm.buscar = $$v
+                                  _vm.fecR = $$v
                                 },
-                                expression: "buscar"
+                                expression: "fecR"
                               }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v("   \n            "),
-                    _c(
-                      "div",
-                      { staticClass: "md-layout-item" },
-                      [
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "md-button",
-                          {
-                            staticClass:
-                              "md-icon-button md-dense md-raised md-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.listarDatos(
-                                  _vm.page,
-                                  _vm.buscar,
-                                  _vm.criterio
-                                )
-                              }
-                            }
-                          },
-                          [_c("md-icon", [_vm._v("search")])],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v("   \n              "),
-                    _c(
-                      "div",
-                      { staticClass: "md-layout-item" },
-                      [
-                        _c(
-                          "md-checkbox",
-                          {
-                            model: {
-                              value: _vm.demo,
-                              callback: function($$v) {
-                                _vm.demo = $$v
+                            },
+                            [_c("label", [_vm._v("Fecha de Inicio")])]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v("   \n                "),
+                      _c(
+                        "div",
+                        { staticClass: "md-layout-item" },
+                        [
+                          _c(
+                            "md-datepicker",
+                            {
+                              attrs: {
+                                value: "fecF",
+                                "md-immediately": "",
+                                "md-model-type": String
                               },
-                              expression: "demo"
-                            }
-                          },
-                          [_vm._v("Finalizados")]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
+                              on: { input: _vm.toString },
+                              model: {
+                                value: _vm.fecF,
+                                callback: function($$v) {
+                                  _vm.fecF = $$v
+                                },
+                                expression: "fecF"
+                              }
+                            },
+                            [_c("label", [_vm._v("Fecha de Final")])]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v("\n                   \n              "),
+                      _vm._v(" "),
+                      _c(
+                        "md-checkbox",
+                        {
+                          model: {
+                            value: _vm.demo,
+                            callback: function($$v) {
+                              _vm.demo = $$v
+                            },
+                            expression: "demo"
+                          }
+                        },
+                        [_vm._v("Finalizados")]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "table-responsive" }, [
                     _c(

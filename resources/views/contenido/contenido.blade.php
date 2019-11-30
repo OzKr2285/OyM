@@ -43,7 +43,7 @@
                 <fichaveh></fichaveh>
             </template>
 
-            <template v-if="menu==7">
+            <template v-if="menu==64">
                 <user></user>
             </template>
 
@@ -156,6 +156,7 @@
             <template v-if="menu==63">
                 <horario></horario>
             </template>
+   
 
             <!-- Programacion  de Mantenimientos -->
             <template v-if="menu==20">
