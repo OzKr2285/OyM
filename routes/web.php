@@ -120,6 +120,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cliente/actualizar', 'ClienteController@update');
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
 
+        
         Route::post('/demo/registrar', 'demoController@store');
 
         Route::get('/detactequipo', 'DetActEquipoController@index');
