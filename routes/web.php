@@ -101,6 +101,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
 
+        Route::get('/cargo', 'CargoController@index');
+        Route::post('/cargo/registrar', 'CargoController@store');
+        Route::put('/cargo/actualizar', 'CargoController@update');
+        Route::post('/cargo/eliminar', 'CargoController@destroy');
         Route::get('/cargo/selectCargo', 'CargoController@selectCargo');
 
         Route::get('/categoria', 'CategoriaController@index');
