@@ -153,6 +153,10 @@
                 <areas></areas>
             </template>
 
+            <template v-if="menu==62">
+                <cargo></cargo>
+            </template>
+
             <template v-if="menu==63">
                 <horario></horario>
             </template>
