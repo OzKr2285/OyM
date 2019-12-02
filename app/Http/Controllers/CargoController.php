@@ -17,7 +17,7 @@ class CargoController extends Controller
 
         if ($buscar==''){
             $cargo = Cargo::join('areas','cargos.id_area','=','areas.id')
-            ->select('cargos.id','areas.nombre as nomArea','cargos.nombre')
+            ->select('cargos.id','areas.id as idArea','areas.nombre as nomArea','cargos.nombre')
             ->orderBy('nomArea', 'asc')->paginate(15);
         }
         else{
@@ -40,14 +40,16 @@ class CargoController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $cargo = new Cargo();
-        $cargo->nombre = $request->nombre;        
+        $cargo->nombre = $request->nombre; 
+        $cargo->id_area = $request->idArea;
         $cargo->save();
     }
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
         $cargo = Cargo::findOrFail($request->id);
-        $cargo->nombre = $request->nombre;        
+        $cargo->nombre = $request->nombre;       
+        $cargo->id_area = $request->idArea;
         $cargo->save();
     }
     public function destroy(Request $request)
@@ -62,8 +64,8 @@ class CargoController extends Controller
            
         $cargo = Cargo::join('areas','cargos.id_area','=','areas.id')
         ->select('cargos.id','areas.nombre as nomArea','cargos.nombre')
-        ->where('cargos.id_area',$buscar)
-        ->orderBy('cargos.nombre', 'asc')->get();
+        // ->where('cargos.id_area',$buscar)
+        ->orderBy('nomArea', 'asc')->get();
 
         return ['cargo' => $cargo];
   }
