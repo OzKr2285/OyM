@@ -24,8 +24,8 @@ class TicketServController extends Controller
             ->join('mpios','personas.id_mpio','=','mpios.id')
             ->join('objpqrs','serv_pqrs.id_objpqrs','=','objpqrs.id')
             ->join('categorias','objpqrs.id_cat','=','categorias.id')
-            ->select('serv_pqrs.id as idticket','serv_pqrs.fecha','personas.id','personas.nombreFull','personas.direccion','mpios.nombre as mpio','personas.telefono', 'categorias.nombre as nomCat','objpqrs.nombre','serv_pqrs.desc','serv_pqrs.prioridad','serv_pqrs.edo' )
-            ->orderBy('serv_pqrs.prioridad' , 'asc')->paginate(15);
+            ->select('serv_pqrs.id as idticket','serv_pqrs.fecha','personas.id','personas.nombreFull','personas.nombres','personas.apellidos','personas.email','personas.direccion','mpios.nombre as mpio','personas.telefono', 'categorias.id as idCat','categorias.nombre as nomCat','objpqrs.id as idObjpqrs','objpqrs.nombre','serv_pqrs.desc','serv_pqrs.prioridad','serv_pqrs.medio','serv_pqrs.edo' )
+            ->orderBy('serv_pqrs.fecha' , 'desc')->orderBy('serv_pqrs.prioridad' , 'asc')->paginate(15);
         }
         else{
             $ticket  = TicketServ::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'descripcion')->paginate(15);

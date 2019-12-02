@@ -43,7 +43,7 @@
     
                   <div class="md-layout-item">
                     <md-datepicker
-                      v-model="fecR"
+                      v-model="fecI"
                       value="fecI"
                       @input="toString"
                       md-immediately
@@ -96,8 +96,8 @@
                       <template v-if="objeto.prioridad=='M'">
                         <span class="badge badge-warning">Media</span>
                       </template>
-                      <template else v-if="objeto.prioridad=='A'">
-                        <span class="badge badge-danger">Alta</span>
+                      <template else v-if="objeto.prioridad=='MA'">
+                        <span class="badge badge-danger">Urgente</span>
                       </template>  
                     </td>
                     <td v-text="objeto.fecha"></td>
@@ -853,6 +853,7 @@
 </template>
 
 <script>
+import format from "date-fns/format";
 import { validationMixin } from "vuelidate";
 import {
   MdButton,
@@ -883,6 +884,8 @@ export default {
   mixins: [validationMixin],
 
   data() {
+        let dateFormat = this.$material.locale.dateFormat || "yyyy-MM-dd";
+    let now = new Date();
     return {
       form: {
         cedula: "",
@@ -914,7 +917,7 @@ export default {
       modal3: 0,
       mostrarDisp:0,     
       idArea:0,     
-      fecR: format(now, dateFormat),
+      fecI: format(now, dateFormat),
       fecF: format(now, dateFormat),
       // Genero M-F
       arrayPrioridad: [
@@ -967,6 +970,39 @@ export default {
   },
 
   computed: {
+        type() {
+      if (
+        typeof this.dynamicByModel === "object" &&
+        this.dynamicByModel instanceof Date &&
+        isValid(this.dynamicByModel)
+      ) {
+        return "date";
+      } else if (typeof this.dynamicByModel === "string") {
+        return "string";
+      } else if (
+        Number.isInteger(this.dynamicByModel) &&
+        this.dynamicByModel >= 0
+      ) {
+        return "number";
+      } else if (this.model === null || this.model === undefined) {
+        return "null";
+      } else {
+        throw new Error("Type error");
+      }
+    },
+    mdType() {
+      switch (this.mdTypeValue) {
+        case "date":
+          return Date;
+        case "string":
+          return String;
+        case "number":
+          return Number;
+      }
+    },
+    dateFormat() {
+      return this.$material.locale.dateFormat || "yyyy-MM-dd";
+    },
     isActived: function() {
       return this.pagination.current_page;
     },
@@ -995,6 +1031,22 @@ export default {
     }
   },
   methods: {
+    toString() {
+      this.toDate();
+      this.dynamicByModel =
+        this.dynamicByModel && format(this.dynamicByModel, this.dateFormat);
+    },
+        toDate() {
+      switch (this.type) {
+        case "string":
+          this.dynamicByModel = parse(
+            this.dynamicByModel,
+            this.dateFormat,
+            new Date()
+          );
+          break;
+      }
+    },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -1390,16 +1442,20 @@ export default {
     mostrarActualizar(data = []) {
       let me = this;
       (this.tipoAccion = 2), (me.listado = 0);
-      (this.idTicketServ = data["idTicketServ"]),
-        (this.estacion_id = data["id"]);
-      this.form.nombre = data["nombre"];
-      this.form.descripcion = data["descripcion"];
+      (this.form.cedula = data["id"]),
+        (this.ticket_id = data["id"]);
+      this.idCategoria = data["idCat"];
+      this.idObjeto = data["idObjpqrs"];
+      this.form.nombres = data["nombres"];
+      this.form.apellidos = data["apellidos"];
+      this.direccion = data["direccion"];
+      this.telefono = data["telefono"];
+      this.form.email = data["email"];
+      this.observacion = data["desc"];
+      this.idMedio = data["medio"];
+      this.idPrioridad = data["prioridad"];
     },
-    mostrarDatos(data = []) {
-      // revisar objeto valores no llega data
-      let me = this;
-      this.form.nombres = data["nombreFull"];
-    },
+
     mostrarDetalle() {
       this.clearForm();
       let me = this;
@@ -1471,7 +1527,7 @@ export default {
           medio: this.idMedio,
           prioridad: this.idPrioridad,
           desc: this.observacion.toUpperCase(),
-          id: this.estacion_id
+          id: this.ticket_id
         })
         .then(function(response) {
           me.ocultarDetalle();
@@ -1498,10 +1554,10 @@ export default {
       }).then(result => {
         if (result.value) {
           let me = this;
-          this.estacion_id = data["id"];
+          this.ticket_id = data["id"];
           axios
             .post("/estacion/eliminar", {
-              id: this.estacion_id
+              id: this.ticket_id
             })
             .then(function(response) {
               me.ocultarDetalle();
