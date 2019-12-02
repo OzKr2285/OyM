@@ -104,16 +104,30 @@
             <form action method="post" enctype="multipart/form-data" class="form-horizontal">
               <md-card-content>
                 <div class="md-layout">
-                  <md-field md-clearable>
-                    <label>Marca</label>
+
+                    <!-- <label>Marca</label>
                     <md-select v-model="idMarca" md-dense>
                       <md-option
                         v-for="objeto in arrayMarca"
                         :key="objeto.id"
                         :value="objeto.id"
                       >{{objeto.nombre}}</md-option>
-                    </md-select>
-                  </md-field>
+                    </md-select>-->
+                    <span class="md-caption">Marca</span>
+                    <multiselect
+                      v-model="arrayM"
+                      :options="arrayMarca"
+                      placeholder="Seleccione una Marca"
+                      :custom-label="nameWithLang"
+                      label="nombre"
+                      track-by="nombre"
+                    ></multiselect>
+  
+                </div>
+                <div>
+                  <!-- <label class="typo__label">Select with search</label>
+                  <multiselect v-model="arrayM" :options="arrayMarca"  placeholder="Select one" :custom-label="nameWithLang" label="nombre" track-by="nombre"></multiselect>-->
+                  <!-- <pre class="language-json"><code>{{ arrayM }}</code></pre> -->
                 </div>
                 <div class="md-layout">
                   <md-field md-clearable :class="getValidationClass('nombre')">
@@ -172,6 +186,8 @@
 
 <script>
 import { validationMixin } from "vuelidate";
+// importar libreria
+import Multiselect from "vue-multiselect";
 import {
   MdButton,
   MdContent,
@@ -191,10 +207,21 @@ Vue.use(MdList);
 import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
+  components: {
+    Multiselect
+  },
   mixins: [validationMixin],
 
   data() {
     return {
+      value: { name: "Vue.js", language: "JavaScript" },
+      options: [
+        { name: "Vue.js", language: "JavaScript" },
+        { name: "Rails", language: "Ruby" },
+        { name: "Sinatra", language: "Ruby" },
+        { name: "Laravel", language: "PHP" },
+        { name: "Phoenix", language: "Elixir" }
+      ],
       form: {
         nombre: ""
       },
@@ -207,6 +234,7 @@ export default {
 
       arrayDatos: [],
       arrayMarca: [],
+      arrayM: { id: 0, nombre: "" },
       arrayModelo: [],
       modal: 0,
       tituloModal: "",
@@ -263,6 +291,12 @@ export default {
     }
   },
   methods: {
+    //   nameWithLang ({ nombre, id }) {
+    //   return `${nombre} — [${id}]`
+    // },
+    nameWithLang({ nombre }) {
+      return `${nombre}`;
+    },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -315,7 +349,8 @@ export default {
     mostrarActualizar(data = []) {
       let me = this;
       (this.tipoAccion = 2), (me.listado = 0);
-      (this.idMarca = data["idMarca"]),
+      (this.arrayM.id = data["idMarca"]),
+      (this.arrayM.nombre = data["nommarca"]),
         (this.modelo_id = data["id"]),
         (this.form.nombre = data["nombre"]);
     },
@@ -354,7 +389,7 @@ export default {
 
       axios
         .post("/modelo/registrar", {
-          idMarca: this.idMarca,
+          idMarca: this.arrayM.id,
           nombre: this.form.nombre.toUpperCase()
         })
         .then(function(response) {
@@ -371,7 +406,7 @@ export default {
 
       axios
         .put("/modelo/actualizar", {
-          idMarca: this.idMarca,
+          idMarca: this.arrayM.id,
           nombre: this.form.nombre.toUpperCase(),
           id: this.modelo_id
         })
