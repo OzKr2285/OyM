@@ -54,7 +54,7 @@ class AreaController extends Controller
     }
     //
     public function selectArea(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        // if (!$request->ajax()) return redirect('/');
         $area = Area::select('id','nombre')->orderBy('nombre', 'asc')->get();
       return ['area' => $area];
   }

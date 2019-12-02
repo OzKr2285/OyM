@@ -5,7 +5,7 @@
       <!-- Ejemplo de tabla Listado -->
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Gestión de Cargos 
+          <i class="fa fa-align-justify"></i> Gestión de Cargos
           <button
             type="button"
             @click="abrirModal('Cargo','registrar')"
@@ -19,7 +19,7 @@
             <div class="col-md-6">
               <div class="input-group">
                 <select class="form-control col-md-3" v-model="criterio">
-                  <option value="nombre">Nombre</option>                  
+                  <option value="nombre">Nombre</option>
                 </select>
                 <input
                   type="text"
@@ -27,7 +27,7 @@
                   @keyup.enter="listarCargo(1,buscar,criterio)"
                   class="form-control"
                   placeholder="Texto a buscar"
-                >
+                />
                 <button
                   type="submit"
                   @click="listarCargo(1,buscar,criterio)"
@@ -41,20 +41,28 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr class="p-3 mb-2 bg-dark text-white">
-                <th>Nombre</th> 
-                <th>Área</th>             
+                <th>Nombre</th>
+                <th>Área</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="objeto in arrayMain" :key="objeto.id">
-                <td v-text="objeto.nombre"></td>                
+                <td v-text="objeto.nombre"></td>
                 <td v-text="objeto.nomArea"></td>
                 <td>
-                  <md-button class="md-icon-button " @click="abrirModal('Cargo','actualizar',objeto)" title="Actualizar">                         
+                  <md-button
+                    class="md-icon-button"
+                    @click="abrirModal('Cargo','actualizar',objeto)"
+                    title="Actualizar"
+                  >
                     <i class="material-icons Color3">edit</i>
                   </md-button>
-                  <md-button class="md-icon-button md-primary " @click="eliminarCargo(objeto)" title="Eliminar">
+                  <md-button
+                    class="md-icon-button md-primary"
+                    @click="eliminarCargo(objeto)"
+                    title="Eliminar"
+                  >
                     <i class="material-icons Color4">delete</i>
                   </md-button>
                 </td>
@@ -117,23 +125,45 @@
           <div class="modal-body">
             <form action method="post" enctype="multipart/form-data" class="form-horizontal">
               <md-card-content>
-                <md-field :class="getValidationClass('nombre')">
-                  <label for="first-name">Nombre</label>
-                  <md-input
-                    name="first-name"
-                    id="first-name"
-                    autocomplete="given-name"
-                    v-model="form.nombre"
-                    :disabled="sending"
-                  />
-                  <span
-                    class="md-error"
-                    v-if="!$v.form.nombre.required"
-                  >El nombre de la marca es requerida</span>
-                  <!-- <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
-                </md-field>
-  
-               
+                <div class="md-layout">
+                  <!-- <md-field md-clearable>
+                    <label>Ärea</label>
+                    <md-select v-model="idArea" md-dense>
+                      <md-option
+                        v-for="objeto in arrayArea"
+                        :key="objeto.id"
+                        :value="objeto.id"
+                      >{{objeto.nombre}}</md-option>
+                    </md-select>
+                  </md-field> -->
+                    <span class="md-caption">Área</span>
+                    <multiselect
+                      v-model="arrayA"
+                      :options="arrayArea"
+                      placeholder="Seleccione un Área"
+                      :custom-label="nameWithLang"
+                      label="nombre"
+                      track-by="nombre"
+                    ></multiselect>
+                </div>
+                <div class="md-layout">
+                  <md-field :class="getValidationClass('nombre')">
+                    <label for="first-name">Nombre</label>
+                    <md-input
+                      name="first-name"
+                      id="first-name"
+                      autocomplete="given-name"
+                      v-model="form.nombre"
+                      :disabled="sending"
+                    />
+
+                    <span
+                      class="md-error"
+                      v-if="!$v.form.nombre.required"
+                    >El nombre del cargo es requerido</span>
+                    <!-- <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
+                  </md-field>
+                </div>
               </md-card-content>
             </form>
           </div>
@@ -173,7 +203,16 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { MdButton, MdContent, MdField,MdAutocomplete,MdCard, MdMenu, MdList } from "vue-material/dist/components";
+import Multiselect from "vue-multiselect";
+import {
+  MdButton,
+  MdContent,
+  MdField,
+  MdAutocomplete,
+  MdCard,
+  MdMenu,
+  MdList
+} from "vue-material/dist/components";
 // import VueMaterial from 'vue-material'
 // Vue.use(VueMaterial)
 Vue.use(MdButton);
@@ -186,18 +225,22 @@ Vue.use(MdList);
 import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
-
   mixins: [validationMixin],
-
+  components: {
+    Multiselect
+  },
   data() {
     return {
       form: {
-        nombre: "",
+        nombre: ""
       },
       sending: false,
       idCargo: 0,
-     
+      idArea: 0,
+
       arrayMain: [],
+      arrayArea:[],
+      arrayA:{id:0, nombre:''},
       modal: 0,
       tituloModal: "",
       tipoAccion: 0,
@@ -261,6 +304,9 @@ export default {
         };
       }
     },
+    nameWithLang({ nombre }) {
+      return `${nombre}`;
+    },
     validarDatos() {
       this.$v.$touch();
 
@@ -275,22 +321,32 @@ export default {
       this.form.descripcion = null;
     },
 
-   
     listarCargo(page, buscar, criterio) {
       let me = this;
       var url =
-        "/cargo?page=" +
-        page +
-        "&buscar=" +
-        buscar +
-        "&criterio=" +
-        criterio;
+        "/cargo?page=" + page + "&buscar=" + buscar + "&criterio=" + criterio;
       axios
         .get(url)
         .then(function(response) {
           var respuesta = response.data;
           me.arrayMain = respuesta.cargo.data;
           me.pagination = respuesta.pagination;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    
+    getArea() {
+      let me = this;
+
+      var url = "/area/selectArea";
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response);
+          var respuesta = response.data;
+          me.arrayArea = respuesta.area;
         })
         .catch(function(error) {
           console.log(error);
@@ -304,12 +360,12 @@ export default {
       me.listarCargo(page, buscar, criterio);
     },
     registrarCargo() {
-
       let me = this;
 
       axios
         .post("/cargo/registrar", {
-          nombre: this.form.nombre.toUpperCase()          
+          idArea: this.arrayA.id,
+          nombre: this.form.nombre.toUpperCase()
         })
         .then(function(response) {
           me.cerrarModal();
@@ -321,12 +377,12 @@ export default {
         });
     },
     actualizarCargo() {
-
       let me = this;
 
       axios
         .put("/cargo/actualizar", {
-          nombre: this.form.nombre,          
+          idArea: this.arrayA.id,
+          nombre: this.form.nombre,
           id: this.idCargo
         })
         .then(function(response) {
@@ -390,17 +446,22 @@ export default {
           switch (accion) {
             case "registrar": {
               this.modal = 1;
+              this.form.nombre="";
               this.tituloModal = "Registrar Cargo";
               this.tipoAccion = 1;
               break;
             }
+            // muestra la información en el componente vue
             case "actualizar": {
               //console.log(data);
               this.modal = 1;
               this.tituloModal = "Actualizar Cargo";
               this.tipoAccion = 2;
               this.idCargo = data["id"];
-              this.form.nombre = data["nombre"];            
+              this.form.nombre = data["nombre"];
+              this.arrayA.id=data["idArea"];
+              this.arrayA.nombre=data["nomArea"];
+              // nombre v-model        datos que vienen del controlador (Main)
               break;
             }
           }
@@ -410,7 +471,7 @@ export default {
   },
 
   mounted() {
-  
+    this.getArea();
     this.listarCargo(1, this.buscar, this.criterio);
   }
 };
