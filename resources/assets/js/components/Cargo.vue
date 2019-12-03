@@ -239,7 +239,13 @@ export default {
       idArea: 0,
 
       arrayMain: [],
-      arrayArea:[],
+      _arrayArea: [],
+      get arrayArea() {
+        return this._arrayArea;
+      },
+      set arrayArea(value) {
+        this._arrayArea=value;
+      },
       arrayA:{id:0, nombre:''},
       modal: 0,
       tituloModal: "",
