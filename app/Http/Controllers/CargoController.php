@@ -10,8 +10,8 @@ class CargoController extends Controller
     //
     public function index(Request $request)
     {
-      // if (!$request->ajax()) return redirect('/');
-// parametro Buscar que viene del componente vue
+    // if (!$request->ajax()) return redirect('/');
+    // parametro Buscar que viene del componente vue
         $buscar = $request->buscar;
         $criterio = $request->criterio;
 
@@ -21,7 +21,14 @@ class CargoController extends Controller
             ->orderBy('nomArea', 'asc')->paginate(15);
         }
         else{
-            $cargo = Cargo::where($criterio, 'like', '%'. $buscar . '%')->orderBy('nombre')->paginate(15);
+            // $cargo = Cargo::where($criterio, 'like', '%'. $buscar . '%')
+            // ->orderBy('nombre')->paginate(15);
+
+            $cargo = Cargo::join('areas','cargos.id_area','=','areas.id')
+            ->select('cargos.id','areas.id as idArea','areas.nombre as nomArea','cargos.nombre')
+            ->where('cargos.nombre', 'like', '%'. $buscar . '%')
+            ->orWhere('areas.nombre', 'like', '%'. $buscar . '%')
+            ->orderBy('areas.nombre', 'asc')->paginate(15);
         }
 
         return [
@@ -63,8 +70,9 @@ class CargoController extends Controller
         $buscar = $request->buscar;
            
         $cargo = Cargo::join('areas','cargos.id_area','=','areas.id')
-        ->select('cargos.id','areas.nombre as nomArea','cargos.nombre')
-        // ->where('cargos.id_area',$buscar)
+        ->select('cargos.id','areas.id as idArea','areas.nombre as nomArea','cargos.nombre')
+        ->where('cargos.id_area',$buscar)
+        ->orwhere('nomArea',$buscar)
         ->orderBy('nomArea', 'asc')->get();
 
         return ['cargo' => $cargo];
