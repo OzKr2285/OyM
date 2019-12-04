@@ -214,7 +214,6 @@ export default {
 
   data() {
     return {
-      value: { name: "Vue.js", language: "JavaScript" },
 
       form: {
         nombre: ""

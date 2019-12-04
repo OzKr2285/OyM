@@ -275,6 +275,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/persona/registrar', 'UserController@store');
         Route::put('/persona/actualizar', 'UserController@update');
         Route::get('/persona/selectPersona', 'PersonaController@selectPersona');
+        Route::get('/persona/selectLider', 'PersonaController@selectLider');
         Route::get('/persona/selectTecnico', 'PersonaController@selectTecnico');
         Route::get('/persona/getusuario', 'PersonaController@getUsuario');
 
@@ -317,6 +318,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/ticketserv/getDispoA', 'TicketServController@getDispoA');
         Route::get('/ticketserv/getDispoI', 'TicketServController@getDispoI');
         Route::post('/ticketserv/registrar', 'TicketServController@store');
+        Route::put('/ticketserv/actualizar', 'TicketServController@update');
 
         Route::get('/tpestacion', 'TpEstacionController@index');
         Route::post('/tpestacion/registrar', 'TpEstacionController@store');
@@ -337,6 +339,12 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/tpmaterial/eliminar', 'TpMaterialController@destroy');
         Route::get('/tpmaterial/selectTpMaterial', 'TpMaterialController@selectTpMaterial');
         
+        Route::get('/tptramite', 'TpTramiteController@index');
+        Route::post('/tptramite/registrar', 'TpTramiteController@store');
+        Route::put('/tptramite/actualizar', 'TpTramiteController@update');
+        Route::post('/tptramite/eliminar', 'TpTramiteController@destroy');
+        Route::get('/tptramite/selectTpTramite', 'TpTramiteController@selectTpTramite');
+
         Route::get('/trenetapa/selectTrenEtapa', 'TrenEtapaController@selectTrenEtapa');
   
         Route::get('/user', 'UserController@index');

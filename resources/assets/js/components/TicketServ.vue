@@ -39,35 +39,33 @@
                 >
                   <md-icon>search</md-icon>
                 </md-button>
+              </div>
+&nbsp;&nbsp;&nbsp;
+              <div class="md-layout-item">
+                <md-datepicker
+                  v-model="fecI"
+                  value="fecI"
+                  @input="toString"
+                  md-immediately
+                  :md-model-type="String"
+                >
+                  <label>Fecha de Inicio</label>
+                </md-datepicker>
               </div>&nbsp;&nbsp;&nbsp;
-    
-                  <div class="md-layout-item">
-                    <md-datepicker
-                      v-model="fecI"
-                      value="fecI"
-                      @input="toString"
-                      md-immediately
-                      :md-model-type="String"
-                    >
-                      <label>Fecha de Inicio</label>
-                    </md-datepicker>
-
-                  </div>&nbsp;&nbsp;&nbsp;
-                  <div class="md-layout-item">
-                    <md-datepicker
-                      v-model="fecF"
-                      value="fecF"
-                      @input="toString"
-                      md-immediately
-                      :md-model-type="String"
-                    >
-                      <label>Fecha de Final</label>
-                    </md-datepicker>
-                  </div>
-                  &nbsp;&nbsp;&nbsp;
-                <!-- <div class="md-layout-item">                                         -->
-                    <md-checkbox v-model="demo">Finalizados</md-checkbox>
-                  <!-- </div> -->
+              <div class="md-layout-item">
+                <md-datepicker
+                  v-model="fecF"
+                  value="fecF"
+                  @input="toString"
+                  md-immediately
+                  :md-model-type="String"
+                >
+                  <label>Fecha de Final</label>
+                </md-datepicker>
+              </div>&nbsp;&nbsp;&nbsp;
+              <!-- <div class="md-layout-item">                                         -->
+              <md-checkbox v-model="demo">Finalizados</md-checkbox>
+              <!-- </div> -->
             </div>
             <div class="table-responsive">
               <table class="table table-bordered table-striped table-sm">
@@ -89,16 +87,16 @@
                 <tbody>
                   <tr v-for="(objeto,index) in arrayDatos" :key="`objeto-${index}`">
                     <td v-text="objeto.idticket"></td>
-                      <td>
+                    <td>
                       <template v-if="objeto.prioridad=='N'">
                         <span class="badge badge-success">Normal</span>
                       </template>
-                      <template v-if="objeto.prioridad=='M'">
+                      <template v-if="objeto.prioridad=='A'">
                         <span class="badge badge-warning">Media</span>
                       </template>
                       <template else v-if="objeto.prioridad=='MA'">
                         <span class="badge badge-danger">Urgente</span>
-                      </template>  
+                      </template>
                     </td>
                     <td v-text="objeto.fecha"></td>
                     <td v-text="objeto.nombreFull"></td>
@@ -107,8 +105,8 @@
                     <td v-text="objeto.telefono"></td>
                     <td v-text="objeto.nombre"></td>
                     <td v-text="objeto.desc"></td>
-         
-                    <td >
+
+                    <td>
                       <template v-if="objeto.edo==0">
                         <span class="badge badge-primary">Registrado</span>
                       </template>
@@ -117,10 +115,10 @@
                       </template>
                       <template else v-if="objeto.edo==2">
                         <span class="badge badge-success">En Ejecución</span>
-                      </template>                    
+                      </template>
                       <template else v-if="objeto.edo==3">
                         <span class="badge badge-success">Aprobado</span>
-                      </template>                    
+                      </template>
                     </td>
                     <td>
                       <md-button
@@ -201,7 +199,7 @@
                     </md-field>
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
-                    <md-field md-clearable >
+                    <md-field md-clearable>
                       <label for="first-name">Nombres</label>
                       <md-input
                         class="md-body-2"
@@ -211,12 +209,12 @@
                         v-model="form.nombres"
                         :disabled="sending"
                       />
-    
+
                       <!-- <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
                     </md-field>
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
-                    <md-field md-clearable >
+                    <md-field md-clearable>
                       <label for="first-ape">Apellidos</label>
                       <md-input
                         class="md-body-2"
@@ -226,7 +224,7 @@
                         v-model="form.apellidos"
                         :disabled="sending"
                       />
-           
+
                       <!-- <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
                     </md-field>
                   </div>&nbsp;&nbsp;&nbsp;
@@ -240,7 +238,7 @@
                     </md-field>
                   </div>
                 </div>
-                <div class="md-layout">             
+                <div class="md-layout">
                   <div class="md-layout-item">
                     <md-field md-clearable>
                       <label>Dirección</label>
@@ -251,18 +249,18 @@
                     </md-field>
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
-                    <md-field md-clearable >
+                    <md-field md-clearable>
                       <label>E-mail</label>
                       <span class="md-prefix">
                         <i class="material-icons">email</i>
                       </span>
-                      <md-input v-model="form.email" md-counter="80"></md-input>      
+                      <md-input v-model="form.email" md-counter="80"></md-input>
                     </md-field>
                   </div>
                 </div>
                 <div class="md-layout">
-                  <div class="md-layout-item md-size-25">
-                    <md-field md-clearable>
+                  <div class="md-layout-item md-size-35">
+                    <!-- <md-field md-clearable>
                       <label>Tipo de Solicitud</label>
                       <md-select v-model="idCategoria" md-dense @input="getObjeto">
                         <md-option
@@ -271,43 +269,145 @@
                           :value="cat.id"
                         >{{cat.nombre}}</md-option>
                       </md-select>
-                    </md-field>
+                    </md-field> -->
+                  <span class="md-body">Tipo de Solicitud</span>
+                    <multiselect
+                      v-model="arrayC"
+                      @input="getObjeto"
+                      :options="arrayCategoria"
+                      placeholder="Seleccione un Tipo de Solicitud"
+                      :custom-label="nameWithCat"
+                      label="nombre"
+                      track-by="nombre"
+                    ></multiselect>
                   </div>&nbsp;&nbsp;&nbsp;
-                  <div class="md-layout-item">
-                    <md-field md-clearable>
+                  <div v-show="isPetR==0" class="md-layout-item">
+                    <!-- <md-field md-clearable>
                       <label>Objeto de la Solicitud</label>
-                      <md-select v-model="idObjeto" md-dense  @input="setDispoA">
+                      <md-select v-model="idObjeto" md-dense @input="setDispoA">
                         <md-option
                           v-for="objeto in arrayObjeto"
                           :key="objeto.id"
                           :value="objeto.id"
                         >{{objeto.nomobj}}</md-option>
                       </md-select>
-                    </md-field>
-                  </div>&nbsp;&nbsp;&nbsp;
-                  <div class="md-layout-item md-size-25">
-                    <md-field md-clearable>
-                      <label>Área Asignada</label>
-                      <md-select v-model="idArea" md-dense>
+                    </md-field> -->
+                    <span v-show="isPetPQR==0" class="md-body">Objeto de la Solicitud</span>
+                    <span v-show="isPetPQR==1" class="md-body">Detalle de la Causal</span>
+                    <multiselect
+                      v-model="arrayO"
+                      :options="arrayObjeto"
+                      placeholder="Seleccione una causal de Solicitud"
+                      :custom-label="nameWithLang"
+                      label="nomobj"
+                      track-by="nomobj"
+                    ></multiselect>
+                  </div>
+                  <div v-show="isPetR==1" class="md-layout-item">
+                    <!-- <md-field md-clearable>
+                      <label>Objeto de la Solicitud</label>
+                      <md-select v-model="idObjeto" md-dense @input="setDispoA">
                         <md-option
-                          v-for="area in arrayArea"
-                          :key="area.id"
-                          :value="area.id"
-                        >{{area.nombre}}</md-option>
+                          v-for="objeto in arrayObjeto"
+                          :key="objeto.id"
+                          :value="objeto.id"
+                        >{{objeto.nomobj}}</md-option>
                       </md-select>
-                    </md-field>
+                    </md-field> -->
+                    <span v class="md-body">Tipo de Tramite</span>
+                    <multiselect
+                      v-model="arrayTT"
+                      :options="arrayTpTramite"
+                      placeholder="Seleccione un tipo de Reclamación"
+                      :custom-label="nameWithLang"
+                      label="nombre"
+                      track-by="nombre"
+                    ></multiselect>
                   </div>&nbsp;&nbsp;&nbsp;
-  
+                  <div v-show="isPetR==1" class="md-layout-item">
+                    <!-- <md-field md-clearable>
+                      <label>Objeto de la Solicitud</label>
+                      <md-select v-model="idObjeto" md-dense @input="setDispoA">
+                        <md-option
+                          v-for="objeto in arrayObjeto"
+                          :key="objeto.id"
+                          :value="objeto.id"
+                        >{{objeto.nomobj}}</md-option>
+                      </md-select>
+                    </md-field> -->
+                    <span v class="md-body">Detalle de la Causal</span>
+                    <multiselect
+                      v-model="arrayO"
+                      :options="arrayObjeto"
+                      placeholder="Seleccione una causal de Reclamación"
+                      :custom-label="nameWithLang"
+                      label="nomobj"
+                      track-by="nomobj"
+                    ></multiselect>
+                  </div>
                 </div>
-                <div class="md-layout">
-                  <md-field>
-                    <label>Descripción suministrada por el usuario</label>
-                    <md-textarea v-model="observacion"></md-textarea>
-                  </md-field>
-                </div>
-                <div class="md-layout">
+                <div v-show="isPetR==0" class="md-layout">
+                  <div class="md-layout-item md-size-35">
+                    <!-- <div class="md-layout-item md-size-25">
+                      <md-field md-clearable>
+                        <label>Área Asignada</label>
+                        <md-select v-model="idArea" md-dense>
+                          <md-option
+                            v-for="area in arrayArea"
+                            :key="area.id"
+                            :value="area.id"
+                          >{{area.nombre}}</md-option>
+                        </md-select>
+                      </md-field>
+                    </div> -->
+                      <span class="md-body">Área Asignada</span>
+                      <multiselect
+                        v-model="arrayA"
+                        @input="getLider"
+                        :options="arrayArea"
+                        placeholder="Seleccione una Área"
+                        :custom-label="nameWithCat"
+                        label="nombre"
+                        track-by="nombre"
+                      ></multiselect>
+                </div>&nbsp;&nbsp;&nbsp;
+                  <div class="md-layout-item">         
+                    <span class="md-body">Lider de Área</span>
+                      <multiselect
+                        v-model="arrayL"
+                        :options="arrayLider"
+                        placeholder="Seleccione un Lider"
+                        :custom-label="nameWithL"
+                        label="nombreFull"
+                        track-by="nombreFull"
+                      ></multiselect>
+                  </div>
+                  </div>
+               
+                  <div class="md-layout md-size-35">
+                    <div v-show="isPetR==1" class="md-layout-item">
+                    <!-- <md-field md-clearable>
+                      <label>Objeto de la Solicitud</label>
+                      <md-select v-model="idObjeto" md-dense @input="setDispoA">
+                        <md-option
+                          v-for="objeto in arrayObjeto"
+                          :key="objeto.id"
+                          :value="objeto.id"
+                        >{{objeto.nomobj}}</md-option>
+                      </md-select>
+                    </md-field> -->
+                    <span v class="md-body">Tipo de Causal</span>
+                    <multiselect
+                      v-model="arrayTC"
+                      :options="arrayTpCausal"
+                      placeholder="Seleccione un tipo de Causal"
+                      :custom-label="nameWithMedio"
+                      label="name"
+                      track-by="name"
+                    ></multiselect>
+                  </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
-                    <md-field md-clearable>
+                    <!-- <md-field md-clearable>
                       <label>Medio</label>
                       <md-select v-model="idMedio" md-dense>
                         <md-option
@@ -316,10 +416,19 @@
                           :value="objeto.id"
                         >{{objeto.name}}</md-option>
                       </md-select>
-                    </md-field>
+                    </md-field> -->
+                    <span class="md-body">Tipo de Presentación</span>
+                      <multiselect
+                        v-model="arrayM"
+                        :options="arrayTpPres"
+                        placeholder="Seleccione un Medio"
+                        :custom-label="nameWithMedio"
+                        label="name"
+                        track-by="name"
+                      ></multiselect>
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
-                    <md-field md-clearable>
+                    <!-- <md-field md-clearable>
                       <label>Prioridad</label>
                       <md-select v-model="idPrioridad" md-dense>
                         <md-option
@@ -328,8 +437,27 @@
                           :value="objeto.id"
                         >{{objeto.name}}</md-option>
                       </md-select>
-                    </md-field>
+                    </md-field> -->
+                      <span class="md-caption">Prioridad</span>
+                      <multiselect
+                        v-model="arrayP"
+                        :options="arrayPrioridad"
+                        placeholder="Seleccione un Medio"
+                        :custom-label="nameWithPri"
+                        label="name"
+                        track-by="name"
+                      ></multiselect>
                   </div>
+                  </div>
+
+                <div class="md-layout">
+                  <md-field>
+                    <label>Descripción suministrada por el usuario</label>
+                    <md-textarea v-model="observacion"></md-textarea>
+                  </md-field>
+                </div>
+                <div class="md-layout">
+         
                   <!-- <md-button class="md-fab-bottom-left md-mini" @click="abrirModal5()">
                     <md-icon>group_add</md-icon>
                   </md-button>-->
@@ -393,7 +521,7 @@
                       </tr>
                     </tbody>
                   </table>
-                </div> -->
+                </div>-->
                 <!-- <span class="md-caption">Seleccione una o varias Actividades</span>
                 <div class="table-responsive col-md-12">
                   <table class="table table-bordered table-striped table-sm">
@@ -428,7 +556,7 @@
                       </tr>
                     </tbody>
                   </table>
-                </div> -->
+                </div>-->
                 <!-- <div v-show="mostrarDisp==1">
                   <span class="md-caption">Disponibilidad Adjunta</span>
                 <div class="table-responsive col-md-12">
@@ -465,7 +593,7 @@
                     </tbody>
                   </table>
                 </div>
-                </div> -->
+                </div>-->
               </md-card-content>
             </form>
           </div>
@@ -492,6 +620,7 @@
             </md-card-actions>
           </div>
         </template>
+
       </div>
 
       <!-- Fin ejemplo de tabla Listado -->
@@ -518,10 +647,16 @@
             <div class="form-group row">
               <div class="col-md-9">
                 <div class="input-group">
-                  <select class="form-control col-md-4" v-model="idCatServ" @change="getServicio(1, this.idCatServ, this.criterio)" >
-                    <option  v-for="objeto in arrayCatServ"
-                        :key="objeto.id"
-                        :value="objeto.id">{{objeto.nombre}}</option>  
+                  <select
+                    class="form-control col-md-4"
+                    v-model="idCatServ"
+                    @change="getServicio(1, this.idCatServ, this.criterio)"
+                  >
+                    <option
+                      v-for="objeto in arrayCatServ"
+                      :key="objeto.id"
+                      :value="objeto.id"
+                    >{{objeto.nombre}}</option>
                   </select>
 
                   <button
@@ -538,13 +673,13 @@
               <table class="table table-bordered table-striped table-sm">
                 <thead>
                   <tr>
-                    <th>Servicio</th>           
-                    <th>Descripción</th>           
+                    <th>Servicio</th>
+                    <th>Descripción</th>
                     <th>Selección</th>
                   </tr>
                 </thead>
                 <tbody v-if="arrayServicio.length">
-                  <tr v-for="(objeto, index)  in arrayServicio" :key="`objeto-${index}`">                    
+                  <tr v-for="(objeto, index)  in arrayServicio" :key="`objeto-${index}`">
                     <td v-text="objeto.nombre"></td>
                     <td v-text="objeto.desc"></td>
                     <td>
@@ -625,7 +760,7 @@
           <div class="modal-body">
             <div class="form-group row">
               <div class="col-md-6">
-                <div class="input-group">                  
+                <div class="input-group">
                   <button
                     type="submit"
                     @click="getPerso(1, buscar, this.criterio)"
@@ -709,7 +844,7 @@
     <!-- /.modal-dialog -->
 
     <!--Fin del modal-->
-       <!--Inicio del modal agregar/actualizar-->
+    <!--Inicio del modal agregar/actualizar-->
     <div
       class="modal fade"
       tabindex="-1"
@@ -723,12 +858,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" v-text="tituloModal"></h4>
-            <button
-              type="button"
-              class="close"
-              @click="cerrarModal3()"
-              aria-label="Close"
-            >
+            <button type="button" class="close" @click="cerrarModal3()" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -736,7 +866,6 @@
             <div class="form-group row">
               <div class="col-md-6">
                 <div class="input-group">
-
                   <button
                     type="submit"
                     @click="getPerso(1, buscar, this.criterio)"
@@ -758,10 +887,7 @@
                   </tr>
                 </thead>
                 <tbody v-if="arrayDispoA.length">
-                  <tr
-                    v-for="(objeto, index) in arrayDispoA"
-                    :key="`objeto-${index}`"
-                  >
+                  <tr v-for="(objeto, index) in arrayDispoA" :key="`objeto-${index}`">
                     <td v-text="objeto.idticket"></td>
                     <td v-text="objeto.fecha"></td>
                     <td v-text="objeto.desc"></td>
@@ -796,8 +922,7 @@
                         criterio
                       )
                     "
-                    >Ant</a
-                  >
+                  >Ant</a>
                 </li>
                 <li
                   class="page-item"
@@ -812,10 +937,7 @@
                     v-text="page"
                   ></a>
                 </li>
-                <li
-                  class="page-item"
-                  v-if="pagination.current_page < pagination.last_page"
-                >
+                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
                   <a
                     class="page-link"
                     href="#"
@@ -826,20 +948,13 @@
                         criterio
                       )
                     "
-                    >Sig</a
-                  >
+                  >Sig</a>
                 </li>
               </ul>
             </nav>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              @click="cerrarModal3()"
-            >
-              Cerrar
-            </button>
+            <button type="button" class="btn btn-secondary" @click="cerrarModal3()">Cerrar</button>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -848,12 +963,12 @@
     <!-- /.modal-dialog -->
 
     <!--Fin del modal-->
-    
   </main>
 </template>
 
 <script>
 import format from "date-fns/format";
+import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 import {
   MdButton,
@@ -882,9 +997,11 @@ import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
-
+  components: {
+    Multiselect
+  },
   data() {
-        let dateFormat = this.$material.locale.dateFormat || "yyyy-MM-dd";
+    let dateFormat = this.$material.locale.dateFormat || "yyyy-MM-dd";
     let now = new Date();
     return {
       form: {
@@ -900,7 +1017,7 @@ export default {
       sending: false,
       idTicketServ: 0,
       idCatServ: 0,
-      idUsuario: 0,    
+      idUsuario: 0,
       idTec: 0,
       idCategoria: 0,
       idObjeto: 0,
@@ -911,12 +1028,14 @@ export default {
       telefono: "",
       direccion: "",
       observacion: "",
+      isPetPQR: 0,
+      isPetR: 0,
       mostrarC: 1,
       modal5: 0,
       modal2: 0,
       modal3: 0,
-      mostrarDisp:0,     
-      idArea:0,     
+      mostrarDisp: 0,
+      idArea: 0,
       fecI: format(now, dateFormat),
       fecF: format(now, dateFormat),
       // Genero M-F
@@ -925,13 +1044,36 @@ export default {
         { id: "A", name: "Alta" },
         { id: "MA", name: "Muy Alta" }
       ],
+      arrayTpCausal: [
+        { id: "1", name: "FACTURACIÓN" },
+        { id: "2", name: "INSTALACIÓN" },
+        { id: "3", name: "PRESTACIÓN" }
+      ],
       // Tipo Documento
       arrayMedio: [
-        { id: "T", name: "Telefónico" },
-        { id: "I", name: "Internet" },
-        { id: "P", name: "Personal" },
-        { id: "TC", name: "Técnico" }
+        { id: "T", name: "TELEFONICO" },
+        { id: "P", name: "NOTIFICACIÓN PERSONAL" },
+        { id: "P", name: "NOTIFICACIÓN POR EDICTO" },
+        { id: "I", name: "INTERNET" },
+        { id: "TC", name: "TEÉCNICO" },
+        { id: "NA", name: "NO APLICA" }
       ],
+      arrayTpPres: [
+        { id: "01", name: "NOTIFICACIÓN PERSONAL" },
+        { id: "02", name: "NOTIFICACIÓN POR EDICTO" },
+        { id: "03", name: "NO APLICA" }
+      ],
+      // array select
+      arrayO: { id: 0, nombre: "Seleccione" },
+      arrayC: { id: 0, nombre: "Seleccione" },
+      arrayA: { id: 0, nombre: "Seleccione" },
+      arrayM: { id: "T", nombre: "Seleccione" },
+      arrayP: { id: "N", nombre: "Seleccione" },
+      arrayTC: { id: "", nombre: "Seleccione" },
+      arrayTT: { id: 0, nombre: "Seleccione" },
+      arrayL: { id: 0 ,nombre: "Seleccione", nomCargo: "" },
+      arrayLider: [],
+      arrayArea: [],
       arrayDatos: [],
       arrayDispoA: [],
       arraySelectDA: [],
@@ -946,6 +1088,8 @@ export default {
       arrayObjeto: [],
       arrayCatServ: [],
       arrayServicio: [],
+      arrayTpTramite: [],
+      arrayDetCausal: [],
 
       pagination: {
         total: 0,
@@ -970,7 +1114,7 @@ export default {
   },
 
   computed: {
-        type() {
+    type() {
       if (
         typeof this.dynamicByModel === "object" &&
         this.dynamicByModel instanceof Date &&
@@ -1036,7 +1180,7 @@ export default {
       this.dynamicByModel =
         this.dynamicByModel && format(this.dynamicByModel, this.dateFormat);
     },
-        toDate() {
+    toDate() {
       switch (this.type) {
         case "string":
           this.dynamicByModel = parse(
@@ -1054,6 +1198,21 @@ export default {
           "md-invalid": field.$invalid && field.$dirty
         };
       }
+    },
+    nameWithLang({ nomobj }) {
+      return `${nomobj}`;
+    },
+    nameWithCat({ nombre }) {
+      return `${nombre}`;
+    },
+    nameWithMedio({ name }) {
+      return `${name}`;
+    },
+    nameWithPri({ name }) {
+      return `${name}`;
+    },
+    nameWithL ({ nombreFull, nomCargo }) {
+      return `${nombreFull} — [${nomCargo}]`
     },
     validarDatos() {
       this.$v.$touch();
@@ -1099,13 +1258,13 @@ export default {
       this.modal5 = 0;
       this.tituloModal = "";
     },
-    eliminarDetalleD(index){
+    eliminarDetalleD(index) {
       let me = this;
       me.arraySelectDA.splice(index, 1);
     },
-    setDispoA(){
-      if(this.idObjeto==9){
-        this.mostrarDisp=1;
+    setDispoA() {
+      if (this.idObjeto == 9) {
+        this.mostrarDisp = 1;
         this.abrirModal3();
       }
     },
@@ -1139,6 +1298,21 @@ export default {
           console.log(error);
         });
     },
+    getTpTramite() {
+      let me = this;
+
+      var url = "/tptramite/selectTpTramite";
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response);
+          var respuesta = response.data;
+          me.arrayTpTramite = respuesta.tptramite;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     getCatServ() {
       let me = this;
 
@@ -1156,8 +1330,17 @@ export default {
     },
     getObjeto() {
       let me = this;
-
-      var url = "/objpqrs/selectCat?buscar=" + this.idCategoria;
+      if(this.arrayC.id==3){
+        me.isPetR=1;
+      }else{
+        me.isPetR=0;
+      }
+      if(this.arrayC.id==1){
+        me.isPetPQR=1;
+      }else{
+        me.isPetPQR=0;
+      }
+      var url = "/objpqrs/selectCat?buscar=" + this.arrayC.id;
       axios
         .get(url)
         .then(function(response) {
@@ -1172,23 +1355,39 @@ export default {
           console.log(error);
         });
     },
+    getLider() {
+      let me = this;
+
+      var url = "/persona/selectLider?buscar=" + this.arrayA.id;
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response);
+          var respuesta = response.data;
+          me.arrayLider = respuesta.perso;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     getServicio(page, buscar, criterio) {
       let me = this;
 
-      var url = "/servicio/getservicio?page=" + page + "&buscar=" + me.idCatServ;
+      var url =
+        "/servicio/getservicio?page=" + page + "&buscar=" + me.idCatServ;
       axios
         .get(url)
         .then(function(response) {
           //console.log(response);
           var respuesta = response.data;
           me.arrayServicio = respuesta.servicio.data;
-          me.pagination = respuesta.pagination;  
+          me.pagination = respuesta.pagination;
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-     getDispoA(page, buscar, criterio) {
+    getDispoA(page, buscar, criterio) {
       let me = this;
       var url =
         "/ticketserv/getDispoA?page=" +
@@ -1316,10 +1515,10 @@ export default {
           text: "La Actividad seleccionada ya se encuentra agregada!"
         });
       } else {
-        me.arrayServ.push({ 
+        me.arrayServ.push({
           id: data["id"],
           nombre: data["nombre"],
-          desc: data["desc"]          
+          desc: data["desc"]
         });
       }
     },
@@ -1460,6 +1659,12 @@ export default {
       this.clearForm();
       let me = this;
       (this.tipoAccion = 1), (me.listado = 0);
+      this.arrayO=[];  
+      this.arrayL= [];
+      this.arrayM.id="T";  
+      this.arrayM.name="Telefónico";  
+      this.arrayP.id="N";  
+      this.arrayP.name="Normal";  
     },
     ocultarDetalle() {
       this.listado = 1;
@@ -1497,14 +1702,13 @@ export default {
       axios
         .post("/ticketserv/registrar", {
           id_usuario: this.idUsuario,
-          id_objpqrs: this.idObjeto,
-          id_area: this.idArea,
-          medio: this.idMedio,
-          prioridad: this.idPrioridad,
+          id_objpqrs: this.arrayO.id,
+          id_lider: this.arrayL.id,
+          medio: this.arrayM.id,
+          prioridad: this.arrayP.id,
           desc: this.observacion.toUpperCase(),
           data: this.arrayTec,
           data2: this.arrayServ
-          
         })
         .then(function(response) {
           me.ocultarDetalle();
@@ -1522,10 +1726,10 @@ export default {
         .put("/estacion/actualizar", {
           idTicketServ: this.idTicketServ,
           id_usuario: this.idUsuario,
-          id_objpqrs: this.idObjeto,
-          id_area: this.idArea,
-          medio: this.idMedio,
-          prioridad: this.idPrioridad,
+          id_objpqrs: this.arrayO.id,
+          id_lider: this.arrayL.id,
+          medio: this.arrayM.id,
+          prioridad: this.arrayP.id,
           desc: this.observacion.toUpperCase(),
           id: this.ticket_id
         })
@@ -1583,6 +1787,7 @@ export default {
   mounted() {
     this.getArea();
     this.getCategoria();
+    this.getTpTramite();
     this.listarDatos(1, this.buscar, this.criterio);
   }
 };
@@ -1618,7 +1823,7 @@ export default {
 .material-icons.Color4 {
   color: rgba(228, 54, 54, 0.863);
 }
-  .md-dialog {
-    max-width: 768px;
-  }
+.md-dialog {
+  max-width: 768px;
+}
 </style>

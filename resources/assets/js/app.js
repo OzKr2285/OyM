@@ -65,6 +65,7 @@ Vue.component('catserv', require('./components/CatServicio.vue'));
 Vue.component('servicio', require('./components/Servicio.vue'));
 Vue.component('objpqrs', require('./components/ObjPQRS.vue'));
 Vue.component('ticketserv', require('./components/TicketServ.vue'));
+Vue.component('ticketasignar', require('./components/TicketAsignar.vue'));
 
 //Operacion
 Vue.component('dispo', require('./components/Disponibilidad.vue'));

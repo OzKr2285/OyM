@@ -20,11 +20,17 @@ class TicketServController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $ticket = TicketServ::join('personas','serv_pqrs.id_usuario','=','personas.id')     
+            $ticket = TicketServ::join('personas','serv_pqrs.id_usuario','=','personas.id')  
+            ->join('personas as p','serv_pqrs.id_lider','=','p.id')  
+            ->join('cargos','p.id_cargo','=','cargos.id')
+            ->join('areas','cargos.id_area','=','areas.id')   
             ->join('mpios','personas.id_mpio','=','mpios.id')
             ->join('objpqrs','serv_pqrs.id_objpqrs','=','objpqrs.id')
             ->join('categorias','objpqrs.id_cat','=','categorias.id')
-            ->select('serv_pqrs.id as idticket','serv_pqrs.fecha','personas.id','personas.nombreFull','personas.nombres','personas.apellidos','personas.email','personas.direccion','mpios.nombre as mpio','personas.telefono', 'categorias.id as idCat','categorias.nombre as nomCat','objpqrs.id as idObjpqrs','objpqrs.nombre','serv_pqrs.desc','serv_pqrs.prioridad','serv_pqrs.medio','serv_pqrs.edo' )
+            ->select('serv_pqrs.id as idticket','serv_pqrs.fecha','personas.id','personas.nombreFull','personas.nombres','personas.apellidos',
+            'personas.email','personas.direccion','mpios.nombre as mpio','personas.telefono', 'categorias.id as idCat','categorias.nombre as nomCat',
+            'objpqrs.id as idObjpqrs','objpqrs.nombre','serv_pqrs.desc','serv_pqrs.prioridad','serv_pqrs.medio','serv_pqrs.edo','areas.id as idArea',
+            'areas.nombre as nomArea','p.id_cargo as idCargo','cargos.nombre as nomCargo','serv_pqrs.id_lider' )
             ->orderBy('serv_pqrs.fecha' , 'desc')->orderBy('serv_pqrs.prioridad' , 'asc')->paginate(15);
         }
         else{
@@ -183,11 +189,11 @@ class TicketServController extends Controller
             $ticket = new TicketServ();
             $ticket->id_usuario = $request->id_usuario;
             $ticket->id_objpqrs = $request->id_objpqrs;
-            $ticket->id_area = $request->id_area;
+            $ticket->id_lider = $request->id_lider;
             $ticket->medio = $request->medio;
             $ticket->prioridad = $request->prioridad;
             $ticket->desc = $request->desc;
-            $ticket->fecha = $mytime->toDateString();
+            $ticket->fecha = $mytime->toDateTimeString();
            
             
             $ticket->save();
@@ -216,4 +222,48 @@ class TicketServController extends Controller
             DB::rollBack();
         }
     }
+    
+    public function update(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+
+        try{
+            DB::beginTransaction();
+
+            $ticket = TicketServ::findOrFail($request->id);
+     
+            // $ticket->id_usuario = $request->id_usuario;
+            $ticket->id_objpqrs = $request->id_objpqrs;
+            $ticket->prioridad = $request->prioridad;
+            $ticket->desc = $request->desc;
+   
+            $ticket->save();
+
+            $detalles = $request->data;//Array de detalles Técnicos
+            $detalles2 = $request->data2;//Array de detalles Actividades
+            //Recorro todos los elementos
+
+            foreach($detalles as $ep=>$det)
+            {
+                $detalle = new TecServPqrs();
+                $detalle->id_servpqrs = $ticket->id;
+                $detalle->id_tecnico = $det['id'];        
+                $detalle->is_respo = $det['Rol'];        
+                $detalle->save();
+            }          
+            foreach($detalles2 as $ep=>$det)
+            {
+                $detalle = new ActServPqrs();
+                $detalle->id_servpqrs = $ticket->id;
+                $detalle->id_serv = $det['id'];        
+                $detalle->save();
+            }          
+
+            DB::commit();
+        } catch (Exception $e){
+            DB::rollBack();
+        }
+    }
+    
+
 }

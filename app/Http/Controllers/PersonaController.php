@@ -16,6 +16,18 @@ class PersonaController extends Controller
         ->orderBy('nombreFull', 'asc')->get();
       return ['perso' => $perso];
   }
+    public function selectLider(Request $request){
+      //  if (!$request->ajax()) return redirect('/');
+      $idArea = $request->buscar;
+
+      $perso = Persona::join('cargos','personas.id_cargo','=','cargos.id')
+      ->join('areas','cargos.id_area','=','areas.id')
+      ->select('personas.id','personas.nombreFull','personas.id_cargo','cargos.nombre as nomCargo','areas.id as idArea')
+      ->where('personas.is_lider','=',1)
+      ->where('areas.id','=',$idArea)
+      ->orderBy('nombreFull', 'asc')->get();
+    return ['perso' => $perso];
+  }
     public function selectTecnico(Request $request){
 
       // if (!$request->ajax()) return redirect('/');
