@@ -8,9 +8,11 @@
 <nav id="sidebar" class="sidebar-wrapper sidebar-nav">
     <div class="sidebar-content ">
         <div class="sidebar-brand">
-            <a href="#">Software OYM</a>
-            <button id="toggle-sidebar" class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
-          <span class="navbar-toggler-icon"></span>
+            <!-- <a href="#">Software OYM</a> -->
+            <!-- <button id="toggle-sidebar" class="navbar-toggler sidebar-toggler d-md-down-none" type="button"> -->
+            <!-- <img src="img\Publiservicios.png" class="card-img-left" alt="Cinque Terre" width="50%" height="50%">  -->
+            <h5>Software OYM</h5>
+          <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
         </div>
     <div class="sidebar-header">

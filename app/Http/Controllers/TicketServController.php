@@ -236,6 +236,7 @@ class TicketServController extends Controller
             $ticket->id_objpqrs = $request->id_objpqrs;
             $ticket->prioridad = $request->prioridad;
             $ticket->desc = $request->desc;
+            $ticket->edo = $request->estado;
    
             $ticket->save();
 

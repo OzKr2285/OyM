@@ -343,7 +343,7 @@
                       <tr v-for="(objeto, index)  in arrayTec" :key="`objeto-${index}`">
                         <td v-text="objeto.nombre"></td>
                         <td>
-                          <template v-if="objeto.Rol">
+                          <template v-if="objeto.Rol=='1'">
                             <span class="badge badge-primary">Responsable</span>
                           </template>
                           <template v-else>
@@ -879,6 +879,7 @@ export default {
       listado: 1,
       sending: false,
       idTicketServ: 0,
+      ticket_id: 0,
       idCatServ: 0,
       idUsuario: 0,
       idTec: 0,
@@ -1176,12 +1177,27 @@ export default {
           console.log(error);
         });
     },
+    getDetTec() {
+      let me = this;
+
+      var url = "/tecserv/detTecnicos?buscar=" + this.ticket_id;
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response);
+          var respuesta = response.data;
+          me.arrayTec = respuesta.detTec;    
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
 
     getServicio(page, buscar, criterio) {
       let me = this;
 
       var url =
-        "/servicio/getservicio?page=" + page + "&buscar=" + me.idCategoria;
+        "/servicio/getservicio?page=" + page + "&buscar=" + me.idCatServ;
       axios
         .get(url)
         .then(function(response) {
@@ -1452,6 +1468,7 @@ export default {
        this.form.cedula = data["id"];
        this.idCategoria = data["idCat"];
        this.getObjeto();
+       this.getDetTec();
       this.idObjeto = data["idObjpqrs"];
       this.form.nombres = data["nombres"];
       this.form.apellidos = data["apellidos"];
@@ -1536,6 +1553,7 @@ export default {
           id_usuario: this.idUsuario,
           id_objpqrs: this.idObjeto,                  
           prioridad: this.idPrioridad,
+          estado:1,
           desc: this.observacion.toUpperCase(),
           id: this.ticket_id,
            data: this.arrayTec,

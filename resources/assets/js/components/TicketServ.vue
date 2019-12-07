@@ -319,7 +319,7 @@
                       v-model="arrayTT"
                       :options="arrayTpTramite"
                       placeholder="Seleccione un tipo de Reclamación"
-                      :custom-label="nameWithLang"
+                      :custom-label="nameWithCat"
                       label="nombre"
                       track-by="nombre"
                     ></multiselect>
@@ -346,7 +346,7 @@
                     ></multiselect>
                   </div>
                 </div>
-                <div v-show="isPetR==0" class="md-layout">
+                <div  class="md-layout">
                   <div class="md-layout-item md-size-35">
                     <!-- <div class="md-layout-item md-size-25">
                       <md-field md-clearable>

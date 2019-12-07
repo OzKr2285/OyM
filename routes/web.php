@@ -313,6 +313,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/servicio/eliminar', 'ServicioController@destroy');
         Route::get('/servicio/getservicio', 'ServicioController@getServicio');
         
+        Route::get('/tecserv/detTecnicos', 'TecServPqrsController@detTecnicos');
+
         Route::get('/ticketserv', 'TicketServController@index');
         Route::get('/ticketserv/getDispo', 'TicketServController@getDispo');
         Route::get('/ticketserv/getDispoA', 'TicketServController@getDispoA');

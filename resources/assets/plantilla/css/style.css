@@ -7989,7 +7989,7 @@ base-chart.chart {
     position: relative;
     -ms-flex: 0 0 50px;
         flex: 0 0 50px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(58, 84, 199, 0.2);
     border: 0; }
     .sidebar .sidebar-minimizer::before {
       position: absolute;
