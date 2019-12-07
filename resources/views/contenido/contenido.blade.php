@@ -161,6 +161,10 @@
                 <horario></horario>
             </template>
    
+            <template v-if="menu==65">
+                <ticketasignar></ticketasignar>
+            </template>
+   
 
             <!-- Programacion  de Mantenimientos -->
             <template v-if="menu==20">

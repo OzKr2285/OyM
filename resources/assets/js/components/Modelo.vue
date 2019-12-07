@@ -214,14 +214,7 @@ export default {
 
   data() {
     return {
-      value: { name: "Vue.js", language: "JavaScript" },
-      options: [
-        { name: "Vue.js", language: "JavaScript" },
-        { name: "Rails", language: "Ruby" },
-        { name: "Sinatra", language: "Ruby" },
-        { name: "Laravel", language: "PHP" },
-        { name: "Phoenix", language: "Elixir" }
-      ],
+
       form: {
         nombre: ""
       },

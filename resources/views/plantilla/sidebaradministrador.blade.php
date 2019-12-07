@@ -8,9 +8,11 @@
 <nav id="sidebar" class="sidebar-wrapper sidebar-nav">
     <div class="sidebar-content ">
         <div class="sidebar-brand">
-            <a href="#">Software OYM</a>
-            <button id="toggle-sidebar" class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
-          <span class="navbar-toggler-icon"></span>
+            <!-- <a href="#">Software OYM</a> -->
+            <!-- <button id="toggle-sidebar" class="navbar-toggler sidebar-toggler d-md-down-none" type="button"> -->
+            <!-- <img src="img\Publiservicios.png" class="card-img-left" alt="Cinque Terre" width="50%" height="50%">  -->
+            <h5>Software OYM</h5>
+          <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
         </div>
     <div class="sidebar-header">
@@ -82,6 +84,12 @@
                             <li @click="menu=36" >
                                 <a  href="#"><i class="icon-bag"></i>Proveedores</a>
                             </li>
+                            <li @click="menu=48" >
+                                <a  href="#"><i class="icon-user-following"></i>Tp. Material</a>
+                            </li>
+                            <li @click="menu=49" >
+                                <a  href="#"><i class="icon-user-following"></i>Ref. Material</a>
+                            </li>
                             <li @click="menu=64" >
                                 <a  href="#"><i class="icon-bag"></i>Rol Usuarios</a>
                             </li>
@@ -108,12 +116,7 @@
                             <li @click="menu=58" >
                                 <a  href="#"><i class="icon-bag"></i>Diámetros</a>
                             </li> 
-                            <li @click="menu=3" >
-                                <a  href="#"><i class="icon-wallet"></i>E. Estación</a>
-                            </li>
-                            <li @click="menu=41" >
-                                <a  href="#"><i class="icon-basket-loaded"></i> E. de Cómputo</a>
-                            </li>
+
                             <li @click="menu=13" >
                                 <a  href="#"><i class="icon-wallet"></i>Tp. de Equipo</a>
                             </li>
@@ -135,9 +138,7 @@
                             <li @click="menu=32" >
                                 <a  href="#"><i class="icon-bag"></i>Insumos x Equipos</a>
                             </li>  
-                            <li @click="menu=6" >
-                                <a  href="#"><i class="icon-bag"></i>Vehículos</a>
-                            </li>
+
                             <li @click="menu=6" >
                                 <a  href="#"><i class="icon-bag"></i>Medidores</a>
                             </li>
@@ -169,6 +170,12 @@
                                 <li @click="menu=45" >
                                     <a  href="#"><i class="icon-user-following"></i>Actividades</a>
                                 </li> 
+                                <li @click="menu=45" >
+                                    <a  href="#"><i class="icon-user-following"></i>Tp. Tramite</a>
+                                </li> 
+                                <li @click="menu=45" >
+                                    <a  href="#"><i class="icon-user-following"></i>Detalle Causal</a>
+                                </li> 
                             </ul>                            
                         </div>                        
                     </li>
@@ -185,7 +192,15 @@
                                 <li @click="menu=5" >
                                     <a  href="#"><i class="icon-basket-loaded"></i>Estaciones</a>
                                 </li>
-
+                                <li @click="menu=3" >
+                                    <a  href="#"><i class="icon-wallet"></i>E. Estación</a>
+                                </li>
+                                <li @click="menu=41" >
+                                    <a  href="#"><i class="icon-basket-loaded"></i> E. de Cómputo</a>
+                                </li>
+                                <li @click="menu=6" >
+                                    <a  href="#"><i class="icon-bag"></i>Vehículos</a>
+                                </li>
                                 <li @click="menu=9" >
                                     <a  href="#"><i class="icon-notebook"></i>Redes</a>
                                 </li>
@@ -223,6 +238,19 @@
                             </ul>
                         </div>
                     </li> 
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-globe"></i>
+                            <span class="menu-text">Ejecución  Mantenimiento</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>                                    
+                                <li @click="menu=20" >
+                                    <a  href="#"><i class="icon-basket-loaded"></i>Ejecución</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="header-menu">
                         <span>OPERACIÓN</span>
                     </li>
@@ -236,40 +264,44 @@
                             <li @click="menu=40" >
                                 <a  href="#"><i class="icon-user-following"></i>Solicitud</a>
                             </li>
-                            <li @click="menu=40" >
-                                <a  href="#"><i class="icon-user-following"></i>Asignación</a>
-                            </li>
-                            <li @click="menu=40" >
-                                <a  href="#"><i class="icon-user-following"></i>Ejecución</a>
-                            </li>
-
                             </ul>
                         </div>
                         <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fa fa-globe"></i>
-                            <span class="menu-text">PQR´S</span>
+                            <span class="menu-text">Act. de Asignación</span>
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
+                            <li @click="menu=65" >
+                                <a  href="#"><i class="icon-user-following"></i>Asignación</a>
+                            </li>
+                            </ul>
+                        </div>
+                    </li>
+                        <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-globe"></i>
+                            <span class="menu-text">Act. de Ejecución</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>   
+                            <li @click="menu=39" >
+                                <a  href="#"><i class="icon-user-following"></i>Servicio Técnico </a>
+                            </li>      
+                            <li @click="menu=50" >
+                                <a  href="#"><i class="icon-user"></i>Reclamación</a>
+                            </li>
                             <li @click="menu=47 " >
                                 <a  href="#"><i class="icon-user-following"></i>Disponibilidad</a>
                             </li>
                             <li @click="menu=50" >
-                                <a  href="#"><i class="icon-user"></i>Instalaciones</a>
-                            </li>
-                            <li @click="menu=39" >
-                                <a  href="#"><i class="icon-user-following"></i>Ordenes de Servicio </a>
-                            </li>
-                            <li @click="menu=48" >
-                                <a  href="#"><i class="icon-user-following"></i>Tp. Material</a>
-                            </li>
-                            <li @click="menu=49" >
-                                <a  href="#"><i class="icon-user-following"></i>Ref. Material</a>
+                                <a  href="#"><i class="icon-user"></i>Instalación</a>
                             </li>
                             <li @click="menu=45" >
-                                <a  href="#"><i class="icon-user-following"></i> Servicios</a>
+                                <a  href="#"><i class="icon-user-following"></i> T2</a>
                             </li>
+                       
                             </ul>
                         </div>
                     </li>
