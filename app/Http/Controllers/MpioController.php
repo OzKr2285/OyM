@@ -9,11 +9,11 @@ class MpioController extends Controller
 {
     //
     public function selectMpio(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        // if (!$request->ajax()) return redirect('/');
         $buscar = $request->buscar;           
         $mpio = Mpio::join('dptos','mpios.id_dpto','=','dptos.id')
-        ->select('mpios.id','mpios.nombre')
-        ->where('mpios.id_dpto',$buscar)
+        ->select('mpios.id','mpios.nombre','dptos.nombre as nomDpto')
+        // ->where('mpios.id_dpto',$buscar)
         ->orderBy('mpios.tmax', '>', 1)->orderBy('mpios.nombre', 'asc')->get();
 
       return ['mpio' => $mpio];

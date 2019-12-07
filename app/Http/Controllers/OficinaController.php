@@ -16,50 +16,72 @@ class OficinaController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $mercado = Oficina::orderBy('nombre')->paginate(15);
+                                    // nom tabla maestra -- tabla work        pk tabla maestra   
+            $oficina = Oficina::join('horarios','oficinas.id_horario','=','horarios.id')
+            ->join('mpios','oficinas.id_mpio','=','mpios.id')
+            ->join('dptos','mpios.id_dpto','=','dptos.id')
+            ->select('oficinas.id as idOficina','oficinas.direccion','oficinas.telefono','oficinas.email','horarios.id as idHorario','mpios.id as idMpios','dptos.id as idDpto','oficinas.nombre as nomOficina','horarios.desc','mpios.nombre as nomMpio','dptos.nombre as nomDpto')
+            ->orderBy('oficinas.nombre', 'asc')->paginate(15);
         }
         else{
-            $mercado = Oficina::where($criterio, 'like', '%'. $buscar . '%')->orderBy('nombre')->paginate(15);
+            $oficina = Oficina::join('horarios','oficinas.id_horario','=','horarios.id')
+            ->join('mpios','oficinas.id_mpio','=','mpios.id')
+            ->join('dptos','mpios.id_dpto','=','dptos.id')
+            ->select('oficinas.id as idOficina','horarios.id as idHorario','mpios.id as idMpios','dptos.id as idDpto','oficinas.nombre as nomOficina','horarios.desc','mpios.nombre as nomMpio','dptos.nombre as nomDpto')
+            ->where('oficinas.nombre', 'like', '%'. $buscar . '%')
+            ->orWhere('horarios.desc', 'like', '%'. $buscar . '%')
+            ->orWhere('dptos.nombre', 'like', '%'. $buscar . '%')
+            ->orWhere('mpios.nombre', 'like', '%'. $buscar . '%')
+            ->orderBy('dptos.nombre', 'asc')->paginate(15);
         }
-        
 
         return [
             'pagination' => [
-                'total'        => $mercado->total(),
-                'current_page' => $mercado->currentPage(),
-                'per_page'     => $mercado->perPage(),
-                'last_page'    => $mercado->lastPage(),
-                'from'         => $mercado->firstItem(),
-                'to'           => $mercado->lastItem(),
+                'total'        => $oficina->total(),
+                'current_page' => $oficina->currentPage(),
+                'per_page'     => $oficina->perPage(),
+                'last_page'    => $oficina->lastPage(),
+                'from'         => $oficina->firstItem(),
+                'to'           => $oficina->lastItem(),
             ],
-            'mercado' => $mercado
+            'oficina' => $oficina
         ];
     }
 
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $mercado = new Mercado();
-        $mercado->nombre = $request->nombre;        
-        $mercado->save();
+        $oficina = new Oficina();
+        $oficina->nombre = $request->nombre;    
+        $oficina->id_mpio = $request->idMpio;
+        $oficina->direccion = $request->direccion;
+        $oficina->telefono = $request->telefono;
+        $oficina->email = $request->email;
+        $oficina->id_horario = $request->idHorario;
+        $oficina->save();
     }
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $mercado = Oficina::findOrFail($request->id);
-        $mercado->nombre = $request->nombre;        
-        $mercado->save();
+        $oficina = Oficina::findOrFail($request->id);
+        $oficina->nombre = $request->nombre;    
+        $oficina->id_mpio = $request->idMpio;
+        $oficina->direccion = $request->direccion;
+        $oficina->telefono = $request->telefono;
+        $oficina->email = $request->email;
+        $oficina->id_horario = $request->idHorario;       
+        $oficina->save();
     }
-    public function destroy(Request $request)
-    {
-        $mercado = Oficina::findOrFail($request->id);
-        $mercado->delete();
+    // public function destroy(Request $request)
+    // {
+    //     $oficina = Oficina::findOrFail($request->id);
+    //     $oficina->delete();
     
-    }
+    // }
 
-    public function selectTpMercado(Request $request){
-          if (!$request->ajax()) return redirect('/');
-        $mercado = Oficina::select('id','nombre')->orderBy('nombre', 'asc')->get();
-        return ['mercado' =>  $mercado];
+    public function selectOficina(Request $request){
+        //   if (!$request->ajax()) return redirect('/');
+        $oficina = Oficina::select('id','nombre')->orderBy('nombre', 'asc')->get();
+        return ['oficina' =>  $oficina];
     }
 }

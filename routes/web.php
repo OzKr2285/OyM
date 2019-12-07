@@ -271,6 +271,12 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/objpqrs/actualizar', 'ObjPQRSController@update');
         Route::post('/objpqrs/eliminar', 'ObjPQRSController@destroy');
         Route::get('/objpqrs/selectCat', 'ObjPQRSController@selectObjeto');
+
+        Route::get('/oficina', 'OficinaController@index');
+        Route::post('/oficina/registrar', 'OficinaController@store');
+        Route::put('/oficina/actualizar', 'OficinaController@update');
+        Route::post('/oficina/eliminar', 'OficinaController@destroy');
+        Route::get('/oficina/selectOficina', 'OficinaController@selectOficina');
         
         Route::post('/persona/registrar', 'UserController@store');
         Route::put('/persona/actualizar', 'UserController@update');

@@ -119,7 +119,7 @@
                 <ciclo></ciclo>
             </template>
             <template v-if="menu==53">
-                <mercado></mercado>
+                <oficina></oficina>
             </template>
             <template v-if="menu==54">
                 <mtoEC></mtoEC>

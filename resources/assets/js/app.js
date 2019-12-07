@@ -42,6 +42,7 @@ Vue.component('user', require('./components/User.vue'));
 Vue.component('ingreso', require('./components/Ingreso.vue'));
 Vue.component('tabdemo', require('./components/tabDemo.vue'));
 Vue.component('cargo', require('./components/Cargo.vue'));
+Vue.component('oficina', require('./components/Oficina.vue'));
 
 // Programacion de Mantenimientos
 Vue.component('mtoes', require('./components/MtoEs.vue'));
