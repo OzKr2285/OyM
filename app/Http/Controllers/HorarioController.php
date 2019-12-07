@@ -54,7 +54,7 @@ class HorarioController extends Controller
         $horario->delete();
     }
     public function selectHorario(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        // if (!$request->ajax()) return redirect('/');
         $horario = Horario::select('id','desc')->orderBy('desc', 'asc')->get();
       return ['horario' => $horario];
   }
