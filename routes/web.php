@@ -164,6 +164,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/detequipoestacion/etapas', 'DetEquipoEstacionController@indexEtapasEs');
         Route::post('/detequipoestacion/registrar', 'DetEquipoEstacionController@store');
         
+        Route::get('/dettpt/selectDetCausal', 'DetCausalController@selectDetCausal');
+
         Route::get('/diametro/selectDiametro', 'DiametroController@selectDiametro');
         
         Route::get('/dpto/selectDpto', 'DptoController@selectDpto');
@@ -277,7 +279,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/persona/selectPersona', 'PersonaController@selectPersona');
         Route::get('/persona/selectLider', 'PersonaController@selectLider');
         Route::get('/persona/selectTecnico', 'PersonaController@selectTecnico');
-        Route::get('/persona/getusuario', 'PersonaController@getUsuario');
+        Route::get('/persona/getusuario', 'PersonaController@getUsuario');        
 
         Route::get('/proveedor', 'ProveedorController@index');
         Route::post('/proveedor/registrar', 'ProveedorController@store');
