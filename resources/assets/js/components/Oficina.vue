@@ -166,25 +166,30 @@
                       <span class="md-prefix">
                         <i class="material-icons">phone_iphone</i>
                       </span>
-                      <md-input v-model="telefono" md-counter="10" maxlength="10"></md-input>
+                      <md-input
+                       v-model="telefono" 
+                       md-counter="10" 
+                       maxlength="10"
+                       autocomplete="given-name"
+                       />
                     </md-field>
                   </div>
                 </div>
                 <div class="md-layaut">
                   <!-- multiselect Ciudad -->
-                  <div class="md-layout-item md-size-22">
+                  <div class="md-layout-item">
                     <span class="md-caption">Ciudad</span>
                     <multiselect
                       v-model="arrayM"                            
                       :options="arrayMpio"
-                      placeholder="Seleccione un Horario"
+                      placeholder="Seleccione un Municipio"
                       :custom-label="nameWithMpio"
                       label="nombre"
                       track-by="nombre"
                     ></multiselect>
                   </div>&nbsp;&nbsp;&nbsp;
                   <!-- multiselect horario -->
-                  <div class="md-layout-item md-size-22">
+                  <div class="md-layout-item">
                     <span class="md-caption">Horario</span>
                     <multiselect
                       v-model="arrayH"                            
@@ -208,6 +213,10 @@
                       <md-input v-model="form.email" md-counter="80"></md-input>
                       <span class="md-error" v-if="!$v.form.email.email">Email incorrecto</span>
                     </md-field>
+                    <span
+                      class="md-error"
+                      v-if="!$v.form.email.required"
+                    ></span>
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
                     <md-field md-clearable :class="getValidationClass('email2')">
@@ -299,19 +308,13 @@ export default {
       sending: false,
       idOficina: 0,
       idHorario: 0,
-      direccion: "",
       telefono: "",
+      direccion: "",
 
       arrayMain: [],
-      _arrayHorario: [],
+      arrayHorario: [],
       arrayMpio:[],
-      get arrayHorario() {
-        return this._arrayHorario;
-      },
-      set arrayHorario(value) {
-        this._arrayHorario=value;
-      },
-      arrayH:{id:0, nombre:''},
+      arrayH:{id:0, desc:''},
       arrayM:{id:0, nombre:'', nomDpto:''},
       modal: 0,
       tituloModal: "",
@@ -385,21 +388,20 @@ export default {
     nameWithLang({ desc }) {
       return `${desc}`;
     },
-          nameWithMpio ({ nombre, nomDpto }) {
+    nameWithMpio ({ nombre, nomDpto }) {
       return `${nombre} — [${nomDpto}]`
     },
     validarDatos() {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.registrarCargo();
+        this.registrarOficina();
         this.clearForm();
       }
     },
     clearForm() {
       this.$v.$reset();
-      this.form.nombre = null;
-      this.form.descripcion = null;
+      this.form.nombre = "";
     },
 
     listarOficina(page, buscar, criterio) {
@@ -454,7 +456,7 @@ export default {
       //Envia la petici�n para visualizar la data de esa p�gina
       me.listarOficina(page, buscar, criterio);
     },
-    registrarCargo() {
+    registrarOficina() {
       let me = this;
 
       axios
@@ -477,9 +479,9 @@ export default {
     },
     actualizarOficina() {
       let me = this;
-
       axios
-        .put("/cargo/actualizar", {
+        .put("/oficina/actualizar", {
+          id: this.idOficina,
           direccion: this.direccion,
           telefono: this.telefono,
           idHorario: this.arrayH.id,
@@ -512,9 +514,9 @@ export default {
       }).then(result => {
         if (result.value) {
           let me = this;
-          this.idOficina = data["id"];
+          this.idOficina = data["idOficina"];
           axios
-            .post("/cargo/eliminar", {
+            .post("/oficina/eliminar", {
               id: this.idOficina
             })
             .then(function(response) {
@@ -560,14 +562,17 @@ export default {
               this.modal = 1;
               this.tituloModal = "Actualizar Oficina";
               this.tipoAccion = 2;
-              this.idOficina = data["id"];
-              this.form.nombre = data["nombre"];
-              this.arrayH.id=data["idHorario"];
-              this.arrayH.nombre=data["horarios.desc"];
-              this.direccion=data["'oficinas.direccion"];
-              this.telefono=data["'oficinas.telefono"];
-              this.email=data["'oficinas.email"];
-              this.
+              this.idOficina = data["idOficina"];
+              this.form.nombre = data["nomOficina"]                          
+              this.arrayH.id = data["idHorario"];
+              this.arrayH.desc = data["desc"];
+              this.direccion = data["dirOficina"];
+              this.telefono = data["telOficina"];
+              this.form.email = data["emaOficina"];
+              this.form.email2 = data["emaOficina"];
+              this.arrayM.id = data["idMpios"];
+              this.arrayM.nombre = data["nomMpio"];
+              this.arrayM.nomDpto = data["nomDpto"];
               // nombre v-model        datos que vienen del controlador (Main)
               break;
             }

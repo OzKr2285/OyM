@@ -83,7 +83,7 @@ class ClienteController extends Controller
     
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        // if (!$request->ajax()) return redirect('/');
         $persona = new Persona();
         $persona->id = $request->nui;
         $persona->nombres = $request->nombres;
