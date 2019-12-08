@@ -55,7 +55,7 @@ class CargoController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $cargo = Cargo::findOrFail($request->id);
-        $cargo->nombre = $request->nombre;       
+        $cargo->nombre = $request->nombre;
         $cargo->id_area = $request->idArea;
         $cargo->save();
     }
