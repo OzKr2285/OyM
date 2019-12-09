@@ -142,7 +142,7 @@
                             <li @click="menu=6" >
                                 <a  href="#"><i class="icon-bag"></i>Medidores</a>
                             </li>
-                            <li @click="menu=6" >
+                            <li @click="menu=68" >
                                 <a  href="#"><i class="icon-bag"></i>Novedades</a>
                             </li>
                             <li @click="menu=10" >
@@ -170,10 +170,10 @@
                                 <li @click="menu=45" >
                                     <a  href="#"><i class="icon-user-following"></i>Actividades</a>
                                 </li> 
-                                <li @click="menu=45" >
+                                <li @click="menu=66" >
                                     <a  href="#"><i class="icon-user-following"></i>Tp. Tramite</a>
                                 </li> 
-                                <li @click="menu=45" >
+                                <li @click="menu=67" >
                                     <a  href="#"><i class="icon-user-following"></i>Detalle Causal</a>
                                 </li> 
                             </ul>                            
