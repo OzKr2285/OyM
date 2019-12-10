@@ -9,4 +9,5 @@ class Novedad extends Model
     //
     protected $table = 'novedades';
     protected $fillable = ['id','nombre','desc'];
+    public $timestamps = false;
 }

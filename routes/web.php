@@ -266,6 +266,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/noveh', 'NoVehController@index');
         Route::post('/noveh/registrar', 'NoVehController@store');
 
+        Route::get('/novedad', 'NovedadController@index');
+        Route::post('/novedad/registrar', 'NovedadController@store');
+        Route::put('/novedad/actualizar', 'NovedadController@update');
+        Route::post('/novedad/eliminar', 'NovedadController@destroy');
         Route::get('/novedad/selectNovedad', 'NovedadController@selectNovedad');
 
         Route::get('/objpqrs', 'ObjPQRSController@index');

@@ -169,6 +169,10 @@
                 <tptramite></tptramite>
             </template>
    
+            <template v-if="menu==68">
+                <novedad></novedad>
+            </template>
+   
 
             <!-- Programacion  de Mantenimientos -->
             <template v-if="menu==20">

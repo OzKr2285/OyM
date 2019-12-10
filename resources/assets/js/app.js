@@ -74,6 +74,7 @@ Vue.component('dispo', require('./components/Disponibilidad.vue'));
 Vue.component('insta', require('./components/Instalacion.vue'));
 Vue.component('tpmaterial', require('./components/TpMaterial.vue'));
 Vue.component('refmaterial', require('./components/RefMaterial.vue'));
+Vue.component('novedad', require('./components/Novedad.vue'));
 
 const app = new Vue({
     el: '#app',
