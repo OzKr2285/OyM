@@ -164,6 +164,10 @@
             <template v-if="menu==65">
                 <ticketasignar></ticketasignar>
             </template>
+
+            <template v-if="menu==66">
+                <tptramite></tptramite>
+            </template>
    
 
             <!-- Programacion  de Mantenimientos -->

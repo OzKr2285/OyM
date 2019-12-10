@@ -58,7 +58,8 @@ Vue.component('diametro', require('./components/Diametro.vue'));
 Vue.component('marcaveh', require('./components/MarcaVeh.vue'));
 Vue.component('linea', require('./components/Linea.vue'));
 Vue.component('areas', require('./components/Area.vue'));
-Vue.component('horario', require('./components/Horario.vue'))
+Vue.component('horario', require('./components/Horario.vue'));
+Vue.component('tptramite', require('./components/TpTramite.vue'));
 
 // Gestion de PQR´S
 Vue.component('categoria', require('./components/Categoria.vue'));
