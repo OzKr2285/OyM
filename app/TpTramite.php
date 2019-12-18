@@ -8,6 +8,6 @@ class TpTramite extends Model
 {
     //
     protected $table = 'pqr_tp_tramite';
-    protected $fillable = ['id','nombre'];
+    protected $fillable = ['id','codigo','nombre'];
     public $timestamps = false;
 }

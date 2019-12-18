@@ -47,6 +47,9 @@ Vue.component('oficina', require('./components/Oficina.vue'));
 // Programacion de Mantenimientos
 Vue.component('mtoes', require('./components/MtoEs.vue'));
 Vue.component('mtoec', require('./components/MtoEC.vue'));
+Vue.component('mtoveh', require('./components/MtoVeh.vue'));
+Vue.component('mtored', require('./components/MtoRed.vue'));
+Vue.component('mtope', require('./components/MtoPE.vue'));
 Vue.component('insumo', require('./components/Insumo.vue'));
 Vue.component('insumoe', require('./components/InsumoE.vue'));
 Vue.component('refequipo', require('./components/RefE.vue'));
@@ -60,6 +63,7 @@ Vue.component('linea', require('./components/Linea.vue'));
 Vue.component('areas', require('./components/Area.vue'));
 Vue.component('horario', require('./components/Horario.vue'));
 Vue.component('tptramite', require('./components/TpTramite.vue'));
+Vue.component('detcausal', require('./components/DetCausal.vue'));
 
 // Gestion de PQR´S
 Vue.component('categoria', require('./components/Categoria.vue'));

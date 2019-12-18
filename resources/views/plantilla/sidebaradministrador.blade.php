@@ -69,7 +69,7 @@
                             <li @click="menu=53" >
                                 <a  href="#"><i class="icon-bag"></i>Ciclos</a>
                             </li> 
-                            <li @click="menu=53" >
+                            <li @click="menu=55" >
                                 <a  href="#"><i class="icon-bag"></i>Oficinas</a>
                             </li> 
                             <li @click="menu=63" >
@@ -139,9 +139,9 @@
                                 <a  href="#"><i class="icon-bag"></i>Insumos x Equipos</a>
                             </li>  
 
-                            <li @click="menu=6" >
+                            <!-- <li @click="menu=6" >
                                 <a  href="#"><i class="icon-bag"></i>Medidores</a>
-                            </li>
+                            </li> -->
                             <li @click="menu=68" >
                                 <a  href="#"><i class="icon-bag"></i>Novedades</a>
                             </li>
@@ -223,16 +223,16 @@
                                 <li @click="menu=54" >
                                     <a  href="#"><i class="icon-basket-loaded"></i> E. de Cómputo</a>
                                 </li>
-                                <li @click="menu=41" >
+                                <!-- <li @click="menu=41" >
                                     <a  href="#"><i class="icon-basket-loaded"></i> E. de Estación</a>
-                                </li>                                 
-                                <li @click="menu=21" >
+                                </li>                                  -->
+                                <li @click="menu=69" >
                                     <a  href="#"><i class="icon-bag"></i>Vehículos</a>
                                 </li>
-                                <li @click="menu=22" >
+                                <li @click="menu=70" >
                                     <a  href="#"><i class="icon-notebook"></i>Redes</a>
                                 </li>
-                                <li @click="menu=23" >
+                                <li @click="menu=71" >
                                     <a  href="#"><i class="icon-notebook"></i>Pasos Especiales</a>
                                 </li>
                             </ul>
@@ -305,9 +305,9 @@
                             </ul>
                         </div>
                     </li>
-                        <!-- <li class="header-menu">
-                            <span>PQR´S</span>
-                         </li> -->
+                        <li class="header-menu">
+                            <span></span>
+                         </li>
 <!--                 
                     <li>
                         <a href="#">

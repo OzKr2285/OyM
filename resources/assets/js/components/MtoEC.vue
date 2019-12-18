@@ -20,7 +20,7 @@
               <table class="table table-bordered table-striped table-sm">
                 <thead>
                   <tr class="p-3 mb-2 bg-dark text-white">
-                    <th>Tipo Estacion</th>
+                    <th>Tipo Equipo</th>
                     <th>Fecha Realización</th>
                     <th>Fecha Finalización</th>
                     <th>Tipo</th>
@@ -167,7 +167,7 @@
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
                     <md-field md-clearable>
-                      <label>Tipo de Estación</label>
+                      <label>Tipo de Equipo</label>
                       <md-select v-model="idTpEstacion" md-dense @input="getEstacion">
                         <md-option
                           v-for="(tpestacion,index) in arrayTpEstacion"
@@ -179,7 +179,7 @@
                   </div>&nbsp;&nbsp;&nbsp;
                   <div class="md-layout-item">
                     <md-field md-clearable>
-                      <label>Estación</label>
+                      <label>Equipo</label>
                       <md-select v-model="idEstacion" md-dense  @input="getNomEstacion">
                         <md-option
                           v-for="(estacion,index) in arrayEstacion"
@@ -195,61 +195,17 @@
                 <md-button class="md-raised md-primary" @click="setDone('first', 'second')">Continue</md-button>
               </md-step>
 
-              <md-step
+              <!-- <md-step
                 id="second"
                 md-label="Seleccionar Etapas"
                 :md-error="secondStepError"
                 :md-done.sync="second"                
               >
-                <template v-if="bDetEtapa" >             
-                  <div class="col-md-12">
-                          <tr v-for="(etapa, index)  in arrayNomEstacion" :key="`etapa-${index}`">                 
-                      <h5><td  v-text="'Estación - '+ etapa.nombre"></td></h5>
-                    </tr>
+            -->
 
-                  </div>
-                  <div class="table-responsive col-md-12">
-                    <table class="table table-bordered table-striped table-sm">
-                      <thead>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Opciones</th>
-                        </tr>
-                      </thead>
-                      <tbody v-if="arrayEtapas.length">
-                        <!-- <tr v-for="(equipo,index) in arrayEquipo" :key="`equipo-${index}`"> -->
-                        <tr v-for="(detalle, index) in arrayEtapas" :key="`detalle-${index}`">
-                          <td v-text="detalle.nombre"></td>
-                          <td v-text="detalle.desc"></td>
+              <!-- </md-step> -->
 
-                          <td>   
-                            <md-button class="md-icon-button md-primary " @click="eliminarDetalle(index)" title="Eliminar">
-                              <i class="material-icons Color4">delete</i>
-                            </md-button>                      
- 
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody v-else>
-                        <tr>
-                          <td colspan="5">NO hay Etapas relacionadas.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="md-layout"></div>
-
-                  <md-button
-                    class="md-raised md-primary"
-                    @click="setDone2('second', 'third')"
-                  >Continue</md-button>
-                  <!-- <md-button class="md-raised md-primary" @click="setError()">Set error!</md-button> -->
-                </template>
-
-              </md-step>
-
-              <md-step id="third" md-label="Mantenimiento Equipos" :md-done.sync="third">
+              <md-step id="second" md-label="Mantenimiento Equipos" :md-done.sync="third">
                 <template v-if="bDetEtapa">
 
                 <div class="md-layout">
@@ -608,7 +564,7 @@
         
           </md-step>
           <md-step
-            id="fourth"
+            id="third"
             md-label="Asignar Técnicos"            
             :md-done.sync="fourt"
           >

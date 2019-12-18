@@ -8,7 +8,7 @@ class DetEquipoEstacion extends Model
 {
     //
     protected $table = 'det_equipos_estacion';
-    protected $fillable = ['id','id_estacion','id_etapa','id_equipo','tp_Tren','id_mpio'];
+    protected $fillable = ['id','id_estacion','id_etapa','id_equipo','tp_Tren'];
     public $timestamps = false;
 
 

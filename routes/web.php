@@ -171,6 +171,12 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/dpto/selectDpto', 'DptoController@selectDpto');
         Route::get('/dpto/selectDptoCbx', 'DptoController@selectDptoCbx');
                 
+        Route::get('/detcausal', 'DetCausalController@index');
+        Route::post('/detcausal/registrar', 'DetCausalController@store');
+        Route::put('/detcausal/actualizar', 'DetCausalController@update');
+        Route::post('/detcausal/eliminar', 'DetCausalController@destroy');
+        Route::get('/detcausal/DetCausal', 'DetCausalController@selectDetCausal');            
+
         Route::get('/etapa', 'EtapaController@index');
         Route::post('/etapa/registrar', 'EtapaController@store');
         Route::put('/etapa/actualizar', 'EtapaController@update');

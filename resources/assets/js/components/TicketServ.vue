@@ -316,6 +316,7 @@
                     </md-field> -->
                     <span v class="md-body">Tipo de Tramite</span>
                     <multiselect
+                      @input="this.getDetCausal"
                       v-model="arrayTT"
                       :options="arrayTpTramite"
                       placeholder="Seleccione un tipo de Reclamación"
@@ -337,12 +338,12 @@
                     </md-field> -->
                     <span v class="md-body">Detalle de la Causal</span>
                     <multiselect
-                      v-model="arrayO"
-                      :options="arrayObjeto"
+                      v-model="arrayCA"
+                      :options="arrayCausal"
                       placeholder="Seleccione una causal de Reclamación"
-                      :custom-label="nameWithLang"
-                      label="nomobj"
-                      track-by="nomobj"
+                      :custom-label="nameDetCausal"
+                      label="nombre"
+                      track-by="nombre"
                     ></multiselect>
                   </div>
                 </div>
@@ -1066,6 +1067,7 @@ export default {
       // array select
       arrayO: { id: 0, nombre: "Seleccione" },
       arrayC: { id: 0, nombre: "Seleccione" },
+      arrayCA: { id: 0, nombre: "Seleccione" },
       arrayA: { id: 0, nombre: "Seleccione" },
       arrayM: { id: "T", nombre: "Seleccione" },
       arrayP: { id: "N", nombre: "Seleccione" },
@@ -1086,6 +1088,7 @@ export default {
       arrayServ: [],
       arrayCategoria: [],
       arrayObjeto: [],
+      arrayCausal: [],
       arrayCatServ: [],
       arrayServicio: [],
       arrayTpTramite: [],
@@ -1214,6 +1217,9 @@ export default {
     nameWithL ({ nombreFull, nomCargo }) {
       return `${nombreFull} — [${nomCargo}]`
     },
+    nameDetCausal ({ id, nombre }) {
+      return `${id} — [${nombre}]`
+    },
     validarDatos() {
       this.$v.$touch();
 
@@ -1331,7 +1337,7 @@ export default {
     getObjeto() {
       let me = this;
       if(this.arrayC.id==3){
-        me.isPetR=1;
+        me.isPetR=1;        
       }else{
         me.isPetR=0;
       }
@@ -1365,6 +1371,21 @@ export default {
           //console.log(response);
           var respuesta = response.data;
           me.arrayLider = respuesta.perso;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    getDetCausal() {
+      let me = this;
+
+      var url = "/detcausal/DetCausal?buscar=" + this.arrayTT.id;
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response);
+          var respuesta = response.data;
+          me.arrayCausal = respuesta.detcausal;
         })
         .catch(function(error) {
           console.log(error);

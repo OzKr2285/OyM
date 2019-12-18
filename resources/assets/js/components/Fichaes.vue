@@ -1457,7 +1457,7 @@ export default {
 
       this.getMpio();
       this.getEstacion();
-      this.idMp = data["id_mpio"];
+      this.idMp = data["idmpio"];
       this.idEstacion = data["idEs"];
       this.getEtapas(); 
     },

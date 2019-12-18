@@ -38,7 +38,7 @@
                 <thead>
                   <tr class="p-3 mb-2 bg-dark text-white">
                     <th>Nombre</th>
-                    <th>Documento</th>
+                    <th>NUI</th>
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>Email</th>
@@ -49,7 +49,7 @@
                 <tbody>
                   <tr v-for="objeto in arrayPersona" :key="objeto.id">
                     <td v-text="objeto.nombreFull"></td>
-                    <td v-text="objeto.num_doc"></td>
+                    <td v-text="objeto.id"></td>
                     <td v-text="objeto.direccion"></td>
                     <td v-text="objeto.telefono"></td>
                     <td v-text="objeto.email"></td>

@@ -369,7 +369,7 @@ export default {
     },
     eliminarModelo(data = []) {
       swal({
-        title: "Esta seguro de Eliminar la Estación " + data["nombre"],
+        title: "Esta seguro de Eliminar la Novedad " + data["nombre"],
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -419,14 +419,14 @@ export default {
           switch (accion) {
             case "registrar": {
               this.modal = 1;
-              this.tituloModal = "Registrar Novedades";
+              this.tituloModal = "Registrar Novedad";
               this.tipoAccion = 1;
               break;
             }
             case "actualizar": {
               //console.log(data);
               this.modal = 1;
-              this.tituloModal = "Actualizar Novedades";
+              this.tituloModal = "Actualizar Novedad";
               this.tipoAccion = 2;
               this.modelo_id = data["id"];
               this.form.nombre = data["nombre"];              

@@ -651,10 +651,10 @@ export default {
   },
 
   mounted() {
-    this.getDpto();
-    this.getRed();
-    this.getDiam();
-    this.listarRed(1, this.buscar, this.criterio);
+    // this.getDpto();
+    // this.getRed();
+    // this.getDiam();
+    // this.listarRed(1, this.buscar, this.criterio);
   }
 };
 </script>

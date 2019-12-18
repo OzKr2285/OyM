@@ -119,14 +119,14 @@
                 <ciclo></ciclo>
             </template>
             <template v-if="menu==53">
-                <oficina></oficina>
+                <mercado></mercado>
             </template>
             <template v-if="menu==54">
                 <mtoEC></mtoEC>
             </template>
 
             <template v-if="menu==55">
-                <mtoEC></mtoEC>
+                <oficina></oficina>
             </template>
 
             <template v-if="menu==56">
@@ -169,8 +169,24 @@
                 <tptramite></tptramite>
             </template>
    
+            <template v-if="menu==67">
+                <detcausal></detcausal>
+            </template>
+   
             <template v-if="menu==68">
                 <novedad></novedad>
+            </template>
+   
+            <template v-if="menu==69">
+                <mtoveh></mtoveh>
+            </template>
+   
+            <template v-if="menu==70">
+                <mtored></mtored>
+            </template>
+   
+            <template v-if="menu==71">
+                <mtope></mtope>
             </template>
    
 
