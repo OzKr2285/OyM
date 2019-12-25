@@ -188,6 +188,9 @@
             <template v-if="menu==71">
                 <mtope></mtope>
             </template>
+            <template v-if="menu==72">
+                <ticketservtec></ticketservtec>
+            </template>
    
 
             <!-- Programacion  de Mantenimientos -->
@@ -216,6 +219,9 @@
             <template v-if="menu==12">
                 <h1>Acerca de</h1>
             </template>
+            <template v-if="menu==72">
+                <ticketservtec></ticketservtec>
+            </template>
             @elseif (Auth::user()->idrol == 3)
 
             <template v-if="menu==1">
@@ -243,6 +249,11 @@
             <template v-if="menu==12">
                 <h1>Acerca de</h1>
             </template>
+
+            <template v-if="menu==72">
+                <ticketservtec></ticketservtec>
+            </template>
+   
             @else
 
             @endif

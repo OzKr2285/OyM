@@ -72,6 +72,7 @@ Vue.component('servicio', require('./components/Servicio.vue'));
 Vue.component('objpqrs', require('./components/ObjPQRS.vue'));
 Vue.component('ticketserv', require('./components/TicketServ.vue'));
 Vue.component('ticketasignar', require('./components/TicketAsignar.vue'));
+Vue.component('ticketservtec', require('./components/TicketServTec.vue'));
 
 //Operacion
 Vue.component('dispo', require('./components/Disponibilidad.vue'));
@@ -82,6 +83,7 @@ Vue.component('novedad', require('./components/Novedad.vue'));
 
 const app = new Vue({
     el: '#app',
+    
     data :{
         menu : 0
     }

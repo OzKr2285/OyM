@@ -22,7 +22,7 @@ class PersonaController extends Controller
 
       $perso = Persona::join('cargos','personas.id_cargo','=','cargos.id')
       ->join('areas','cargos.id_area','=','areas.id')
-      ->select('personas.id','personas.nombreFull','personas.id_cargo','cargos.nombre as nomCargo','areas.id as idArea')
+      ->select('personas.id','personas.nombreFull','personas.id_cargo','cargos.nombre as nomCargo','areas.id as idArea','personas.email')
       ->where('personas.is_lider','=',1)
       ->where('areas.id','=',$idArea)
       ->orderBy('nombreFull', 'asc')->get();
@@ -35,14 +35,14 @@ class PersonaController extends Controller
       $buscar = $request->buscar;
       
       if ($buscar==''){
-        $perso = Persona::select('personas.id','personas.nombreFull')
+        $perso = Persona::select('personas.id','personas.nombreFull','personas.email')
         ->where('personas.is_empleado','=',1)
         ->where('personas.id_cargo','=',25)
         ->orWhere('personas.id_cargo','=',26)
         ->orderBy('nombreFull', 'asc')->paginate(10);
       }
       else{
-        $perso = Persona::select('personas.id','personas.nombreFull')
+        $perso = Persona::select('personas.id','personas.nombreFull','personas.email')
         ->where('personas.is_empleado','=',1)
         ->where('personas.id_cargo','=',25)
         ->Where('personas.id_cargo','=',26)

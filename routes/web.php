@@ -331,6 +331,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/servicio/eliminar', 'ServicioController@destroy');
         Route::get('/servicio/getservicio', 'ServicioController@getServicio');
         
+        Route::get('/tecserv', 'TecServPqrsController@index');
         Route::get('/tecserv/detTecnicos', 'TecServPqrsController@detTecnicos');
 
         Route::get('/ticketserv', 'TicketServController@index');

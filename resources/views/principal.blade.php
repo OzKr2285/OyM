@@ -67,7 +67,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="img/avatars/6.png" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    <span class="d-md-down-none">{{Auth::user()->usuario}} </span>
+                    <span class="d-md-down-none">{{Auth::user()->nom}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
@@ -91,7 +91,8 @@
 
         <div class="app-body">            
             @if(Auth::check())
-                @if (Auth::user()->idrol == 1)
+                @if (Auth::user()->idrol == 1)  
+                                  
                     @include('plantilla.sidebaradministrador')
                 @elseif (Auth::user()->idrol == 2)
                     @include('plantilla.sidebarTecnico')
@@ -128,6 +129,7 @@
 
     </body>
     <script language="javascript">
+   
 jQuery(function ($) {
 
 // Dropdown menu

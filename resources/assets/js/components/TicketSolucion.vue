@@ -5,7 +5,7 @@
       <!-- Ejemplo de tabla Listado -->
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Asignar Solicitudes
+          <i class="fa fa-align-justify"></i> Atención de Solicitudes
 
         </div>
         <template v-if="listado==1">

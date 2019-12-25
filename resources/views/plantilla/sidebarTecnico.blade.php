@@ -19,10 +19,9 @@
             alt="User picture">
         </div>
         <div class="user-info">
-            <span class="user-name">OzKr
-            <strong>{{Auth::user()->usuario}}</strong>
+            <span class="user-name">{{Auth::user()->nom}}
             </span>
-            <span class="user-role">Administrator</span>
+            <span class="user-role">Técnico</span>
             <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
@@ -38,18 +37,28 @@
                     <span>OPERACIÓN</span>
                 </li>
                     <li class="sidebar-dropdown">
-                        <a href="#">
+                    <a href="#">
                             <i class="fa fa-globe"></i>
-                            <span class="menu-text">Act. de Operación</span>
+                            <span class="menu-text">Act. de Ejecución</span>
                         </a>
                         <div class="sidebar-submenu">
-                            <ul>  
-                            <li @click="menu=40" >
-                                <a  href="#"><i class="icon-user-following"></i>Asignación</a>
+                            <ul>   
+                            <li @click="menu=72, usu='{{Auth::user()->usuario}}'" >
+                                <a  href="#"><i class="icon-user-following"></i>Servicio Técnico </a>
+                            </li>      
+                            <li @click="menu=50" >
+                                <a  href="#"><i class="icon-user"></i>Reclamación</a>
                             </li>
-                            <li @click="menu=40" >
-                                <a  href="#"><i class="icon-user-following"></i>Ejecución</a>
+                            <li @click="menu=47 " >
+                                <a  href="#"><i class="icon-user-following"></i>Disponibilidad</a>
                             </li>
+                            <li @click="menu=50" >
+                                <a  href="#"><i class="icon-user"></i>Instalación</a>
+                            </li>
+                            <li @click="menu=45" >
+                                <a  href="#"><i class="icon-user-following"></i> T2</a>
+                            </li>
+                       
                             </ul>
                         </div>
                         <li class="sidebar-dropdown">

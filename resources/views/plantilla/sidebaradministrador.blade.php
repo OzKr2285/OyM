@@ -6,6 +6,7 @@
     <i class="icon-menu"></i>
 </a> -->
 <nav id="sidebar" class="sidebar-wrapper sidebar-nav">
+
     <div class="sidebar-content ">
         <div class="sidebar-brand">
             <!-- <a href="#">Software OYM</a> -->
@@ -44,8 +45,9 @@
                             <span class="menu-text">General</span>                         
                         </a>
                         <div class="sidebar-submenu">
-                        <ul>                                    
-                            <li @click="menu=61">
+                        <ul>      
+                                                      
+                            <li @click="menu=61"  >
                                 <a href="#"><i class="icon-bag"></i>Áreas</a>                                                                               
                             </li>
                             <li @click="menu=62">
@@ -286,7 +288,7 @@
                         </a>
                         <div class="sidebar-submenu">
                             <ul>   
-                            <li @click="menu=39" >
+                            <li @click="menu=72" >
                                 <a  href="#"><i class="icon-user-following"></i>Servicio Técnico </a>
                             </li>      
                             <li @click="menu=50" >

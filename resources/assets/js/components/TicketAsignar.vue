@@ -892,6 +892,7 @@ export default {
       telefono: "",
       direccion: "",
       observacion: "",
+      nomTecnico: "",
       mostrarC: 1,
       modal5: 0,
       modal2: 0,
@@ -1281,6 +1282,7 @@ export default {
     },
     agregarTecnico(data = []) {
       let me = this;
+      this.nomTecnico =data["nombreFull"];
       if (me.encuentra5(data["id"])) {
         swal({
           type: "error",
@@ -1291,6 +1293,7 @@ export default {
         me.arrayTec.push({
           id: data["id"],
           nombre: data["nombreFull"],
+          email: data["email"],
           Rol: 0
         });
       }
@@ -1521,6 +1524,13 @@ export default {
       //Envia la petición para visualizar la data de esa página
       me.listarDatos(page, buscar, criterio);
     },
+    cambiarPaginaTec(page, buscar, criterio) {
+      let me = this;
+      //Actualiza la página actual
+      me.pagination.current_page = page;
+      //Envia la petición para visualizar la data de esa página
+      me.getPerso(page, buscar, criterio);
+    },
     registrarTicket() {
       let me = this;
 
@@ -1554,6 +1564,12 @@ export default {
           id_objpqrs: this.idObjeto,                  
           prioridad: this.idPrioridad,
           estado:1,
+          nombres: this.form.nombres,
+          apellidos: this.form.apellidos,
+          direccion: this.direccion,
+          telefono: this.telefono,
+          nomTecnico: this.nomTecnico,
+          email: this.form.email.toUpperCase(),
           desc: this.observacion.toUpperCase(),
           id: this.ticket_id,
            data: this.arrayTec,
