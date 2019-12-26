@@ -14,6 +14,14 @@
             <i class="icon-plus"></i>&nbsp;Nuevo
           </button>
           <button
+            title="Solicitudes Solucionadas"
+            type="button"
+            @click="listarDatosEdo(1, 2, this.criterio)"
+            class="btn btn-dark btn-sm"
+          >
+            <i class="fas fa-clipboard-check"></i>&nbsp;
+          </button>
+          <button
             title="Disponibilidades Aprobadas"
             type="button"
             @click="abrirModal3"
@@ -114,10 +122,10 @@
                         <span class="badge badge-warning">Asignado</span>
                       </template>
                       <template else v-if="objeto.edo==2">
-                        <span class="badge badge-success">En Ejecución</span>
+                        <span class="badge badge-success">Solucionado</span>
                       </template>
                       <template else v-if="objeto.edo==3">
-                        <span class="badge badge-success">Aprobado</span>
+                        <span class="badge badge-success">Cerrado</span>
                       </template>
                     </td>
                     <td>
@@ -1695,6 +1703,26 @@ export default {
       let me = this;
       var url =
         "/ticketserv?page=" +
+        page +
+        "&buscar=" +
+        buscar +
+        "&criterio=" +
+        criterio;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayDatos = respuesta.ticket.data;
+          me.pagination = respuesta.pagination;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    listarDatosEdo(page, buscar, criterio) {
+      let me = this;
+      var url =
+        "/ticketserv/estado?page=" +
         page +
         "&buscar=" +
         buscar +

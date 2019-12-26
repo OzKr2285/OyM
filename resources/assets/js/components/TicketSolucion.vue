@@ -1526,14 +1526,8 @@ export default {
 
       axios
         .post("/ticketserv/registrar", {
-          id_usuario: this.idUsuario,
-          id_objpqrs: this.arrayO.id,
-          id_lider: this.arrayL.id,
-          medio: this.arrayM.id,
-          prioridad: this.arrayP.id,
-          desc: this.observacion.toUpperCase(),
-          data: this.arrayTec,
-          data2: this.arrayServ
+          id_servpqrs: this.idUsuario,
+          solucion: this.arrayO.id,
         })
         .then(function(response) {
           me.ocultarDetalle();

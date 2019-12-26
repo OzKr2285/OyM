@@ -5,7 +5,7 @@
       <!-- Ejemplo de tabla Listado -->
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Gestión de Equipos por Etapas
+          <i class="fa fa-align-justify"></i> Gestión de Estaciones
           <button
             type="button"
             @click="mostrarDetalle()"
