@@ -85,19 +85,19 @@
                                             <span class="badge badge-warning">Asignado</span>
                                         </template>
                                         <template else v-if="objeto.edo==2">
-                                            <span class="badge badge-success">En Ejecución</span>
+                                            <span class="badge badge-success">Solucionado</span>
                                         </template>
                                         <template else v-if="objeto.edo==3">
-                                            <span class="badge badge-success">Aprobado</span>
+                                            <span class="badge badge-success">Cerrado</span>
                                         </template>
                                     </td>
                                     <td>
                                         <md-button class="md-icon-button" @click="mostrarActualizar(objeto)" title="Actualizar">
                                             <i class="material-icons Color3">edit</i>
                                         </md-button>
-                                        <md-button class="md-icon-button md-primary" @click="eliminarEstacion(objeto)" title="Eliminar">
+                                        <!-- <md-button class="md-icon-button md-primary" @click="setSolucion(objeto)" title="Eliminar">
                                             <i class="material-icons Color4">delete</i>
-                                        </md-button>
+                                        </md-button> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -127,10 +127,7 @@
                             </div>
                             <div class="md-layout">
                                 <h6>Dirección {{direccion}} Celular: {{telefono}}</h6>
-                            </div>
-                            <div id="app">
-                                <h6>{{ optData }} </h6>
-                            </div>
+                            </div>  
 
                             <div class="md-layout">
                                 <div class="md-layout-item">
@@ -202,7 +199,7 @@
 
                     <md-card-actions>
                         <md-button type="submit" v-if="tipoAccion==1" class="md-dense md-raised md-primary" :disabled="sending" @click="validarDatos()">Guardar</md-button>
-                        <md-button type="submit" v-if="tipoAccion==2" class="md-dense md-raised md-primary" :disabled="sending" @click="actualizarTicket()">Actualizar</md-button>
+                        <md-button type="submit" v-if="tipoAccion==2" class="md-dense md-raised md-primary" :disabled="sending" @click="setSolucion()">Actualizar</md-button>
                     </md-card-actions>
                 </div>
             </template>
@@ -1187,15 +1184,9 @@ export default {
             let me = this;
 
             axios
-                .post("/ticketserv/registrar", {
-                    id_usuario: this.idUsuario,
-                    id_objpqrs: this.arrayO.id,
-                    id_lider: this.arrayL.id,
-                    medio: this.arrayM.id,
-                    prioridad: this.arrayP.id,
-                    desc: this.observacion.toUpperCase(),
-                    data: this.arrayTec,
-                    data2: this.arrayServ
+                .post("/SolServPqrs/registrar", {
+                    id_servpqrs: this.idUsuario,
+                    solucion: this.solucion                
                 })
                 .then(function (response) {
                     me.ocultarDetalle();
@@ -1210,29 +1201,23 @@ export default {
             let me = this;
 
             axios
-                .put("/ticketserv/actualizar", {
-                    idTicketServ: this.idTicketServ,
-                    id_usuario: this.idUsuario,
-                    id_objpqrs: this.idObjeto,
-                    prioridad: this.idPrioridad,
-                    estado: 1,
-                    desc: this.observacion.toUpperCase(),
-                    id: this.ticket_id,
-                    data: this.arrayTec,
-                    data2: this.arrayServ
+                .put("/SolServPqrs/registrar", {
+                    id_servpqrs: this.ticket_id,
+                    solucion: this.solucion.toUpperCase()                          
                 })
                 .then(function (response) {
                     me.ocultarDetalle();
                     me.listarDatos(1, "", "nombre");
-                    me.mensaje("Actualizado", "Actualizó ");
+                    me.mensaje("Actualizado", "Actualizó ");               
+       
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         },
-        eliminarEstacion(data = []) {
+        setSolucion() {
             swal({
-                title: "Esta seguro de Eliminar la Estación " + data["nombre"],
+                title: "Esta seguro de Cerrar la solicitud #" + this.ticket_id,
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -1246,21 +1231,36 @@ export default {
             }).then(result => {
                 if (result.value) {
                     let me = this;
-                    this.ticket_id = data["id"];
+
+                    // this.ticket_id = data["id"];
                     axios
-                        .post("/estacion/eliminar", {
-                            id: this.ticket_id
-                        })
-                        .then(function (response) {
-                            me.ocultarDetalle();
-                            me.listarDatos(1, "", "nombre");
-                            me.mensaje("Eliminado", "Eliminó ");
-                        })
+                    .put("/SolServPqrs/registrar", {
+                        id_servpqrs: this.ticket_id,
+                        solucion: this.solucion.toUpperCase(),
+                        estado: 2
+                    })
+                    .then(function (response) {
+                        me.ocultarDetalle();
+                        me.listarDatos(1, "", "nombre");
+                        me.mensaje("Actualizado", "Actualizó ");               
+        
+                    })
                         .catch(function (error) {
                             console.log(error);
                         });
                 } else if (
                     // Read more about handling dismissals
+                    axios
+                    .put("/SolServPqrs/registrar", {
+                        id_servpqrs: this.ticket_id,
+                        solucion: this.solucion.toUpperCase()
+                    })
+                    .then(function (response) {
+                        me.ocultarDetalle();
+                        me.listarDatos(1, "", "nombre");
+                        me.mensaje("Actualizado", "Actualizó ");               
+        
+                    }),
                     result.dismiss === swal.DismissReason.cancel
                 ) {}
             });

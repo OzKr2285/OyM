@@ -331,10 +331,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/servicio/eliminar', 'ServicioController@destroy');
         Route::get('/servicio/getservicio', 'ServicioController@getServicio');
         
+        Route::put('/SolServPqrs/registrar', 'SolServPqrsController@store');
+
         Route::get('/tecserv', 'TecServPqrsController@index');
         Route::get('/tecserv/detTecnicos', 'TecServPqrsController@detTecnicos');
 
         Route::get('/ticketserv', 'TicketServController@index');
+        Route::get('/ticketserv/estado', 'TicketServController@indexEstado');
         Route::get('/ticketserv/getDispo', 'TicketServController@getDispo');
         Route::get('/ticketserv/getDispoA', 'TicketServController@getDispoA');
         Route::get('/ticketserv/getDispoI', 'TicketServController@getDispoI');

@@ -43,7 +43,7 @@
                         </a>
                         <div class="sidebar-submenu">
                             <ul>   
-                            <li @click="menu=72, usu='{{Auth::user()->usuario}}'" >
+                            <li @click="menu=72" >
                                 <a  href="#"><i class="icon-user-following"></i>Servicio Técnico </a>
                             </li>      
                             <li @click="menu=50" >
